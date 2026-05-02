@@ -1,18 +1,18 @@
 ---
-description: "Common vertical layout for top-level areas of your app via a collapsible navigation menu."
+description: "通过可折叠导航菜单为应用程序的顶级区域提供常见的垂直布局。"
 ---
 
 # NavigationView
 
-The navigation view control provides a common vertical layout for top-level areas of your app via a collapsible navigation menu. It adapts to a variety of screen sizes and supports both top and left navigation styles.
+NavigationView 控件通过可折叠导航菜单为应用程序的顶级区域提供常见的垂直布局。它可以适应各种屏幕尺寸，并支持顶部和左侧两种导航样式。
 
-- **Class**: [iNKORE.UI.WPF.Modern.Controls](..)[.NavigationView](.)
+- **类**: [iNKORE.UI.WPF.Modern.Controls](..)[.NavigationView](.)
 
-- **Inheritance**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) → [NavigationView](https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview)
+- **继承**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) → [NavigationView](https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview)
 
-## Examples
+## 示例
 
-This example shows how to create a simple navigation view.
+此示例演示如何创建一个简单的 NavigationView。
 
 ```xml
 <ui:NavigationView IsPaneOpen="False">
@@ -44,19 +44,19 @@ This example shows how to create a simple navigation view.
 </ui:NavigationView>
 ```
 
-![A basic NavigationView](basic-view.png)
+![一个基础的 NavigationView](basic-view.png)
 
 :::warning
 
-If you're using left compact layout, we recommend you set the property **IsPaneOpen** to `false` in the XAML code. This prevents from the NavigationViewItem shows unexpected title when startup.
+如果您使用的是左侧紧凑布局，我们建议您在 XAML 代码中将 **IsPaneOpen** 属性设置为 `false`。这样可以防止 NavigationViewItem 在启动时显示意外的标题。
 
-![Unexpected title in LeftCompact mode](unexpected-title.png)
+![LeftCompact 模式下意外的标题](unexpected-title.png)
 
 :::
 
-### Add Footer Items
+### 添加 FooterMenuItems
 
-You can use **ui:NavigationView.FooterMenuItems** property to add items to the footer (bottom part) of the NavigationView.
+您可以使用 **ui:NavigationView.FooterMenuItems** 属性来向 NavigationView 的页脚（底部部分）添加项目。
 
 ```xml
 <ui:NavigationView IsPaneOpen="False">
@@ -104,13 +104,13 @@ You can use **ui:NavigationView.FooterMenuItems** property to add items to the f
 
 ![](footer-items.png)
 
-### Clear background
+### 清除背景
 
-According to the Fluent Design guidelines, the NavigationView control comes with a background layer in the content area as following:
+根据 Fluent Design 指南，NavigationView 控件在内容区域中带有如下背景层：
 
 ![](comes-with-layer-fill.jpg)
 
-In some cases, you may want the background to be clear, without any colors anf filles. You can add a few resources to **FrameworkElement.Resource**:
+在某些情况下，您可能希望背景是透明的，不带任何颜色和填充。您可以向 **FrameworkElement.Resources** 添加一些资源：
 
 ```xml
 <SolidColorBrush x:Key="{x:Static ui:ThemeKeys.NavigationViewContentBackgroundKey}" Color="Transparent"/>
@@ -118,7 +118,7 @@ In some cases, you may want the background to be clear, without any colors anf f
 <Thickness x:Key="NavigationViewContentGridBorderThickness">0,0,0,0</Thickness>
 ```
 
-The full code should look like this:
+完整代码应如下所示：
 
 ```xml
 <ui:NavigationView IsPaneOpen="False">
@@ -170,106 +170,106 @@ The full code should look like this:
 </ui:NavigationView>
 ```
 
-Then you should see there's no more fill in the content area:
+然后您应该会看到内容区域不再有填充：
 
 ![](clear-background.jpg)
 
-The code above is using the overriding resources feature. For more information, you can check [Overrides / Override Resources](%BASE_NAME%/features/overrides/override-resources).
+上面的代码使用了资源覆盖功能。有关更多信息，您可以查看 [覆盖 / 覆盖资源](%BASE_NAME%/features/overrides/override-resources)。
 
-### Navigate through pages
+### 在页面之间导航
 
-The NavigationView usually helps the user go through different pages. To make this, some behinded code and a Frame will be used.
+NavigationView 通常帮助用户在不同页面之间切换。为实现这一点，需要使用一些后台代码和一个 Frame。
 
-For more information, you can try the [example project](https://github.com/iNKORE-NET/UI.WPF.Modern/tree/main/samples/NavigationViewExample).
+有关更多信息，您可以查看 [示例项目 NavigationViewExample](https://github.com/iNKORE-NET/UI.WPF.Modern/tree/main/samples/NavigationViewExample)。
 
-## Remarks
+## 备注
 
-### Is this the right control?
+### 这是正确的控件吗？
 
-NavigationView is an adaptive navigation control that works well for:
+NavigationView 是一种自适应导航控件，适用于：
 
-- Providing a consistent navigational experience throughout your app.
-- Preserving screen real estate on smaller windows.
-- Organizing access to many navigation categories.
+- 在整个应用程序中提供一致的导航体验。
+- 在较小窗口中节省屏幕空间。
+- 组织对多个导航类别的访问。
 
 ### IsFooterSeparatorVisible
 
-Owning both MenuItems and FooterMenus, when the height is not enough for all the items, there will be a scroll bar to display them, and you might also see a separator between MenuItems and FooterMenuItems.
+当同时拥有 MenuItems 和 FooterMenus 且高度不足以容纳所有项目时，会出现滚动条来显示它们，并且您可能还会看到 MenuItems 和 FooterMenuItems 之间的分隔线。
 
-You can use the property **IsFooterSeparatorVisible** to control whether this separator is visible. There are three values you can choose from:
+您可以使用 **IsFooterSeparatorVisible** 属性来控制此分隔线是否可见。您可以选择三个值：
 
-- `true`: The separator will be ALWAYS visible, no matter what the height is.
+- `true`：无论高度如何，分隔线始终可见。
 
-- `false`: The separator will be NEVER be visible, no matter what the height is.
+- `false`：无论高度如何，分隔线始终不可见。
 
-- `null`: The separator will be visible only there's not enough space for all items.
+- `null`：只有在空间不足以显示所有项目时，分隔线才可见。
 
-The default value is `null`.
+默认值为 `null`。
 
-### Display modes
+### 显示模式
 
-You can use the PaneDisplayMode property to configure different navigation styles, or display modes, for the NavigationView.
+您可以使用 PaneDisplayMode 属性为 NavigationView 配置不同的导航样式或显示模式。
 
 #### Top
 
-The pane is positioned above the content.
+面板位于顶部。
 `PaneDisplayMode="Top"`
 
-![Example of top navigation](ms-displaymode-top.png)
+![顶部导航示例](ms-displaymode-top.png)
 
-We recommend top navigation when:
+以下情况推荐顶部导航：
 
-- You have 5 or fewer top-level navigation categories that are equally important, and any additional top-level navigation categories that end up in the dropdown overflow menu are considered less important.
-
-- You need to show all navigation options on screen.
-- You want more space for your app content.
-- Icons cannot clearly describe your app's navigation categories.
+- 您有 5 个或更少同等重要的顶级导航类别，并且下拉溢出菜单中的任何额外顶级导航类别都被视为不那么重要。
+- 您需要在屏幕上显示所有导航选项。
+- 您希望为应用内容留出更多空间。
+- 图标无法清晰描述应用的导航类别。
 
 #### Left
 
-The pane is expanded and positioned to the left of the content.
+面板展开并位于左侧。
 `PaneDisplayMode="Left"`
 
-![Example of expanded left navigation pane](ms-displaymode-left.png)
+![展开的左侧导航面板示例](ms-displaymode-left.png)
 
-We recommend left navigation when:
+以下情况推荐左侧导航：
 
-- You have 5-10 equally important top-level navigation categories.
-- You want navigation categories to be very prominent, with less space for other app content.
+- 您有 5 到 10 个同等重要的顶级导航类别。
+- 您希望导航类别非常醒目，而其他应用内容的空间更少。
 
 #### LeftCompact
 
-The pane shows only icons until opened and is positioned to the left of the content. When opened, the pane overlays the content.
-PaneDisplayMode="LeftCompact"
+面板在打开之前只显示图标，并位于内容左侧。打开后，面板会覆盖内容。
+`PaneDisplayMode="LeftCompact"`
 
-![Example of compact left navigation pane](ms-displaymode-leftcompact.png)
+![紧凑左侧导航面板示例](ms-displaymode-leftcompact.png)
 
 #### LeftMinimal
 
-Only the menu button is shown until the pane is opened. When opened, the pane overlays the left side of the content.
-PaneDisplayMode="LeftMinimal"
+在打开面板之前，只显示菜单按钮。打开后，面板会覆盖内容左侧。
+`PaneDisplayMode="LeftMinimal"`
 
-![Example of minimal left navigation pane](ms-displaymode-leftminimal.png)
+![最小左侧导航面板示例](ms-displaymode-leftminimal.png)
 
 #### Auto
 
-By default, PaneDisplayMode is set to Auto. In Auto mode, the NavigationView adapts between LeftMinimal when the window is narrow, to LeftCompact, and then Left as the window gets wider. For more info, see the adaptive behavior section.
+默认情况下，PaneDisplayMode 设置为 Auto。在 Auto 模式下，当窗口变窄时，NavigationView 会从 LeftMinimal 适配到 LeftCompact，再随着窗口变宽切换到 Left。有关更多信息，请参阅自适应行为部分。
 
-![NavigationView default adaptive behavior](ms-displaymode-auto.png)
+![NavigationView 默认自适应行为](ms-displaymode-auto.png)
 
-### Details & guidelines
+### 详细信息与指南
 
-There are more detailed and useful information on [this page](https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview). If you want to put NavigationView into good use, you should really read this.
+[此页面](https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview)提供了更详细且有用的信息。如果您想更好地使用 NavigationView，强烈建议阅读它。
 
-## See also
+## 另请参阅
 
-### Related articles
+### 相关文章
 
-- [Components / Frame](./frame)
+- [组件 / Frame](./frame)
 
-- [Components / FontIcon](../media/font-icon)
+- [组件 / FontIcon](../media/font-icon)
 
-- [Components / TabControl](./tab-control)
+- [组件 / TabControl](./tab-control)
+
 
 ### Microsoft Learn
 
