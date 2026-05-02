@@ -1,20 +1,20 @@
 ---
-description: "Represents an icon that uses a glyph from the specified font."
+description: "表示一个使用指定字体字形的图标。"
 ---
 
 # FontIcon
 
-FontIcon is a control that displays an icon from a specified font. It is a lightweight alternative to ImageIcon and can be used to display icons in a variety of contexts. The FontIcon is the best choice to use when you have a huge amount of icons that you want to display in your application.
+FontIcon 是一个用于显示指定字体中图标字形的控件。它是 ImageIcon 的轻量替代方案，适用于多种场景下的图标显示。当您的应用需要展示大量图标时，FontIcon 是非常合适的选择。
 
-- **Class**: [iNKORE.UI.WPF.Modern.Controls](..)[.FontIcon](.)
+- **类**: [iNKORE.UI.WPF.Modern.Controls](..)[.FontIcon](.)
 
-- **Inheritance**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [FrameworkElement](https://learn.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement) → [IconElement](.) → [FontIcon](.)
+- **继承**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [FrameworkElement](https://learn.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement) → [IconElement](.) → [FontIcon](.)
 
-## Examples
+## 示例
 
-### Icon from the icon sets
+### 使用图标集中的图标
 
-If an icon set is present, you can use the Icon property to pass the icon data to the component like this:
+如果存在可用图标集，您可以使用 Icon 属性将图标数据传给组件：
 
 ```xml
 <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.Home}"/>
@@ -22,26 +22,26 @@ If an icon set is present, you can use the Icon property to pass the icon data t
 
 ![Home icon from Segoe Fluent Icons](home-from-segoe-fluent.png)
 
-Under the `iNKORE.UI.WPF.Modern.Common.IconKeys` namespace, there are a few sets that you can use made by Microsoft (and they meet the Fluent Design specifications):
+在 `iNKORE.UI.WPF.Modern.Common.IconKeys` 命名空间下，提供了几个由 Microsoft 制作且符合 Fluent Design 规范的图标集：
 
-- `SegoeFluentIcons`: [Segoe Fluent Icons Family](https://learn.microsoft.com/en-us/windows/apps/design/style/segoe-fluent-icons-font) from Microsoft;
+- `SegoeFluentIcons`：来自 Microsoft 的 [Segoe Fluent Icons Family](https://learn.microsoft.com/en-us/windows/apps/design/style/segoe-fluent-icons-font)；
 
-- `FluentSystemIcons`: [Fluent System Icons Family](https://github.com/microsoft/fluentui-system-icons) from Microsoft.
+- `FluentSystemIcons`：来自 Microsoft 的 [Fluent System Icons Family](https://github.com/microsoft/fluentui-system-icons)。
 
-You can also create your own icon set by creating static `iNKORE.UI.WPF.Modern.Common.IconKeys.FontIconData` instances and pass them to the XAML with **x:Static**. For more details, [click here](COMING_SOON).
+您也可以通过创建静态 `iNKORE.UI.WPF.Modern.Common.IconKeys.FontIconData` 实例来构建自己的图标集，并通过 **x:Static** 传入 XAML。更多细节请 [点击这里](COMING_SOON)。
 
 :::danger IMPORTANT
 
-**Segoe Fluent Icons** are part of Microsoft's Segoe UI font family. These icons are primarily intended for use in Microsoft products and services. While they can be used in personal projects, commercial use may require adherence to Microsoft's licensing terms, as they are proprietary assets owned by Microsoft.
+**Segoe Fluent Icons** 属于 Microsoft 的 Segoe UI 字体家族。这些图标主要用于 Microsoft 产品与服务。虽然可以用于个人项目，但商业用途可能需要遵守 Microsoft 的许可条款，因为它们是 Microsoft 拥有的专有资源。
 
 
-**Fluent System Icons** are open-source icons developed by Microsoft as part of the Fluent Design System. These icons are available under the MIT License, allowing for both personal and commercial use without restriction. Users are free to include these icons in their projects, modify them, and distribute them as needed, provided they include the original license and copyright notice.
+**Fluent System Icons** 是 Microsoft 作为 Fluent Design System 一部分推出的开源图标。这些图标基于 MIT 许可证发布，可在个人和商业场景中自由使用。您可以在项目中使用、修改并分发这些图标，但需保留原始许可证和版权声明。
 
-We strongly recommend you take **Fluent System Icons** as your primary choice.
+我们强烈建议您将 **Fluent System Icons** 作为首选。
 
 :::
 
-Here's a few examples of using Fluent System Icons:
+以下是几个使用 Fluent System Icons 的示例：
 
 ```xml
 <ui:SimpleStackPanel Spacing="2" Orientation="Horizontal">
@@ -62,29 +62,29 @@ Here's a few examples of using Fluent System Icons:
 
 ![Different sizes of Fluent System Icons](different-sizes-of-fluent-system.png)
 
-For icon sets with a specified size, such as Fluent System Icons, you need to specify the size in the component as well using **FontSize** property. 
+对于带有指定尺寸的图标集（例如 Fluent System Icons），您还需要在组件中通过 **FontSize** 属性指定匹配尺寸。
 
 :::info
 
-The **FontSize** property is `16` by default. If the icon set is designed for 16px size (like Segoe Fluent Icons), you don't need to specify the **FontSize** property. 
+**FontSize** 属性的默认值是 `16`。如果图标集本身就是为 16px 设计（例如 Segoe Fluent Icons），通常不需要额外指定 **FontSize**。
 
-Some icon sets have different sizes of icon that are packed together (like Fluent System Icons), it's important to specify the FontSize property.
+某些图标集会打包多个尺寸的图标（例如 Fluent System Icons），这时正确设置 FontSize 非常重要。
 
-If the element's FontSize doesn't match the designed size of the icon, the pixel-perfect might be gone and the element might look weird.
+如果元素的 FontSize 与图标设计尺寸不匹配，像素级对齐效果可能会丢失，图标看起来也可能不自然。
 
 :::
 
-### Icon without an icon set
+### 不使用图标集
 
-You can pass a `string` to the **Glyph** property to set the icon when icon set is not suitable. However you may have to specify the **FontFamily** property as well, the default value is `Segoe Fluent Icons`.
+当图标集不适用时，您可以通过 **Glyph** 属性传入 `string` 来设置图标。不过通常还需要指定 **FontFamily** 属性，其默认值是 `Segoe Fluent Icons`。
 
-For example, the following code:
+例如，以下代码：
 
 ```xml
 <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Accessibility_16_Regular}"/>
 ```
 
-equals to:
+等价于：
 
 ```xml
 <ui:FontIcon Glyph="&#xF102;" FontFamily="Fluent System Icons"/>
@@ -92,15 +92,15 @@ equals to:
 
 :::warning
 
-We strongly discourage this as it increases the coupling and complexity of the code, and is difficult to maintain at a later stage.
+我们强烈不建议这样做，因为这会提高代码耦合度和复杂度，后期维护成本也更高。
 
-We recommend that you use an existing Fluent Design-compliant icon library (above) or wrap your own icon library with FontIconData ([tutorial here](COMING_SOON)). Don't use Glyph attributes as a last resort.
+建议优先使用现成的、符合 Fluent Design 的图标库（见上文），或将您自己的图标库封装为 FontIconData（[教程在此](COMING_SOON)）。不要把 Glyph 属性作为常规方案。
 
 :::
 
-### Layering and mirroring
+### 分层与镜像
 
-Some icons (like Segoe Fluent Icons) may have the same fixed width with a consistent height and left origin point, so layering and colorization effects can be achieved by drawing glyphs directly on top of each other. This example show a black outline drawn on top of the zero-width red heart.
+某些图标（例如 Segoe Fluent Icons）具有相同固定宽度、统一高度和一致的左侧起点，因此可以通过将字形直接叠加来实现分层和着色效果。下例展示了在零宽红色爱心上绘制黑色轮廓。
 
 ```xml
 <Grid>
@@ -111,9 +111,9 @@ Some icons (like Segoe Fluent Icons) may have the same fixed width with a consis
 
 ![A layered heart icon](layered-heart-icon.png)
 
-### Going with a text element
+### 搭配文本元素使用
 
-When you're using a FontIcon with a TextBlock, you may do the following code:
+当您将 FontIcon 与 TextBlock 一起使用时，可能会写出如下代码：
 
 ```xml
 <ui:SimpleStackPanel Spacing="4" Orientation="Horizontal">
@@ -122,7 +122,7 @@ When you're using a FontIcon with a TextBlock, you may do the following code:
 </ui:SimpleStackPanel>
 ```
 
-However there's a better way to do this. Using the **IconAndText** component will simplify your code and make it more readable:
+不过还有更好的方式。使用 **IconAndText** 组件可以简化代码并提升可读性：
 
 ```xml
 <ui:IconAndText Icon="{x:Static ui:FluentSystemIcons.Home_16_Regular}" Content="Back to home"/>
@@ -130,46 +130,46 @@ However there's a better way to do this. Using the **IconAndText** component wil
 
 ![The IconAndText component](icon-and-text-component.png)
 
-For more info about IconAndText component, please [click here](./icon-and-text).
+关于 IconAndText 组件的更多信息，请 [点击这里](./icon-and-text)。
 
-## Remarks
+## 备注
 
-### Icon availability
+### 图标可用性
 
-#### Third-party icon sets
+#### 第三方图标集
 
-If you're using your own created icon set, make sure that all the icons are available in the specified font family. If the license allowed, the best way is to put the font file directly into the project as an resource and set the FontFamily to the font file path.
+如果您使用自建图标集，请确保指定字体族中包含所有需要的图标。如果许可允许，最佳做法是将字体文件作为资源直接放入项目，并把 FontFamily 设置为对应字体文件路径。
 
-If you're using a third-party icon set, make sure that the license allows you to use it in your project.
+如果您使用第三方图标集，请确认其许可证允许在您的项目中使用。
 
-#### Pre-bundled icon sets
+#### 预置图标集
 
-If you're using the pre-bundled icon sets from Microsoft mentioned above, please pay attention to the icon availability. 
+如果您使用上文提到的 Microsoft 预置图标集，请注意图标可用性。
 
-- For **Segoe Fluent Icons**, the FontIcon will use the font from your computer. In other words, they may be rendered correctly only in Windows 11 or higher versions. In Windows 10, there's a fallback to **Segoe MDL Assets 2**, which adapts the old design, and in Windows 7, none of the icons will be rendered. However, some icons might be missing on Segoe MDL Assets 2 and are only available when Segoe Fluent Icons font is installed on the user's computer.
+- 对于 **Segoe Fluent Icons**，FontIcon 会使用系统中的字体。换言之，它们通常仅能在 Windows 11 或更高版本中正确渲染。在 Windows 10 上会回退到 **Segoe MDL Assets 2**（旧设计），在 Windows 7 上则不会渲染这些图标。另外，某些图标在 Segoe MDL Assets 2 中可能缺失，只有用户机器安装了 Segoe Fluent Icons 字体后才可用。
 
-    :::info Why we don't embed Segoe Icons?
+    :::info 为什么不内置 Segoe Icons？
 
-    According to Microsoft, it's forbidden to ship this font anywhere than Windows 10 and Windows 11, and we don't think we should risk.
+    按照 Microsoft 的要求，这个字体不允许在 Windows 10 与 Windows 11 之外分发，因此我们不建议冒险使用。
 
-    Using the open and free icon set **Fluent System Icons** is strongly recommended. Not only does it supports multi-sizes, regular and filled variant are both available as well.
+    强烈建议使用开放且免费的 **Fluent System Icons**。它不仅支持多尺寸，还同时提供 regular 与 filled 两种变体。
 
-    If you intend to use Segoe Fluent Icons and want you app to work in Windows 7, the best way to fix this is check if Segoe Fluent Icons is installed on the computer. If not, then download the Font from Microsft (https://aka.ms/SegoeFluentIcons) and then install it.
-    After installation you app needs to be restarted in order that WPF loads the new font correctly.
+    如果您确实要使用 Segoe Fluent Icons 并希望应用兼容 Windows 7，最佳做法是先检测用户设备是否安装了 Segoe Fluent Icons。若未安装，可引导用户从 Microsoft 下载字体（https://aka.ms/SegoeFluentIcons）并安装。
+    安装后需要重启应用，WPF 才能正确加载新字体。
 
     :::
 
-- For **Fluent System Icons**, the font files are embedded in the library, so no worries, they are always available.
+- 对于 **Fluent System Icons**，字体文件已内置在库中，因此始终可用。
 
-### Licensces and copyright
+### 许可与版权
 
-As mentioned above, using the protected icon sets may lead to copyright disputes. If you're using your own icon set, make sure that the license allows you to use it in your project.
+如上所述，使用受保护图标集可能引发版权争议。如果您使用自定义图标集，请确保许可证允许在项目中使用。
 
-If you're using the pre-bundled icon sets from Microsoft, please pay attention to the license and copyright.
+如果您使用 Microsoft 预置图标集，请特别留意其许可和版权条款。
 
-## See also
+## 另请参阅
 
-### Related controls
+### 相关文章
 
 - [Components / ImageIcon](./image-icon)
 

@@ -1,40 +1,40 @@
 ---
-description: "Frame is a content control that supports navigation."
+description: "Frame 是一个支持导航的内容控件。"
 ---
 
 # Frame
 
-The Frame control from WPF supports content navigation within content. Frame can be hosted by a root element like Window, NavigationWindow, Page, UserControl, FlowDocument, or as an island within a content tree that belongs to a root element.
+WPF 的 Frame 控件支持在内容之间进行导航。Frame 可以由 Window、NavigationWindow、Page、UserControl、FlowDocument 等根元素承载，也可以作为属于某个根元素的内容树中的独立区域存在。
 
-Using our extended Frame control, you can navigate with Fluent animations, better performance and more.
+使用我们扩展后的 Frame 控件，您可以获得 Fluent 风格动画、更好的性能等能力。
 
-- **Class**: [iNKORE.UI.WPF.Modern.Controls](..)[.Frame](.)
+- **类**: [iNKORE.UI.WPF.Modern.Controls](..)[.Frame](.)
 
-- **Inheritance**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) → [Frame](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.frame) → [Frame](.)
+- **继承**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) → [Frame](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.frame) → [Frame](.)
 
-## Examples
+## 示例
 
-### Navigate through pages
+### 在页面间导航
 
-The following example shows how to create a simple Frame control to navigate through a set of pages.
+以下示例展示如何创建一个简单的 Frame 控件，并在一组页面之间导航。
 
-First, create two pages called `Page1.xaml` and `Page2.xaml`. Create a folder named `Pages`, right click the folder, and select **Add** → **New Item**. Select **WPF / Page** and name it `Page1.xaml`. Repeat the process to create `Page2.xaml`.
+首先，创建两个页面，分别命名为 `Page1.xaml` 和 `Page2.xaml`。新建一个名为 `Pages` 的文件夹，右键该文件夹并选择 **Add** → **New Item**。选择 **WPF / Page** 并命名为 `Page1.xaml`。重复同样步骤创建 `Page2.xaml`。
 
 ![Add a file to the project](add-a-fiile-to-project.png)
 
 ![Add a new page](add-a-new-page.png)
 
-Add the namespace declaration to the root:
+在根元素中添加命名空间声明：
 
 ```ini
 xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
 ```
 
-Change the root class from Page to `ui:Page`. Go to the code-behind *(e.g. Page1.xaml.cs)*, and change the base class from Page to `iNKORE.UI.WPF.Modern.Controls.Page`.
+将根类从 Page 改为 `ui:Page`。然后进入代码隐藏文件（例如 `Page1.xaml.cs`），把基类从 Page 改为 `iNKORE.UI.WPF.Modern.Controls.Page`。
 
-Then add some content to the pages. For example, add a `TextBlock` to each page to display the page name.
+接着向页面中添加一些内容。例如，为每个页面添加一个 `TextBlock` 来显示页面名称。
 
-Your **Page1** should look like this:
+您的 **Page1** 应该如下所示：
 
 ```xml title="Page1.xaml"
 # highlight-next-line
@@ -77,7 +77,7 @@ namespace WpfApp1.Pages
 }
 ```
 
-And your **Page2** should look like this:
+您的 **Page2** 应该如下所示：
 
 ```xml title="Page2.xaml"
 # highlight-next-line
@@ -120,7 +120,7 @@ namespace WpfApp1.Pages
 }
 ```
 
-Now, create a new window and add a Frame control to it. Add a few buttons to navigate between the pages. Use the **Navigate()** method to pass Page to the Frame control.
+现在，创建一个新窗口并在其中添加 Frame 控件。再添加几个按钮用于页面切换。使用 **Navigate()** 方法将 Page 传递给 Frame 控件。
 
 ```xml
 <Grid>
@@ -155,15 +155,15 @@ private void Button_NavigateToPage2_Click(object sender, RoutedEventArgs e)
 }
 ```
 
-Clicking the buttons will navigate to the corresponding pages like this:
+点击按钮后，会导航到对应页面，如下所示：
 
 ![Navigated to Page 1](navigated-to-page-1.png)
 
 :::warning
 
-We strongly **NOT** recommend you to use the `Navigate(Type sourcePageType)` method to navigate between pages, it's not recommended to use it in the modern UI development. Instead, we recommend you to use the `Navigate(object content)` method which we provided in the Frame control.
+我们**强烈不建议**您使用 `Navigate(Type sourcePageType)` 方法在页面之间导航。在现代 UI 开发中，不建议继续使用此方式。相反，我们建议使用 Frame 控件提供的 `Navigate(object content)` 方法。
 
-For example, we may change the code from this:
+例如，可以把代码从这样：
 
 ```csharp
 private void Button_NavigateToPage1_Click(object sender, RoutedEventArgs e)
@@ -172,7 +172,7 @@ private void Button_NavigateToPage1_Click(object sender, RoutedEventArgs e)
 }
 ```
 
-to this:
+改为这样：
 
 ```csharp
 private void Button_NavigateToPage1_Click(object sender, RoutedEventArgs e)
@@ -181,7 +181,7 @@ private void Button_NavigateToPage1_Click(object sender, RoutedEventArgs e)
 }
 ```
 
-or this, which is even better:
+或者这样（更推荐）：
 
 ```csharp
 Page1 Page_1 = new Page1();
@@ -194,9 +194,9 @@ private void Button_NavigateToPage1_Click(object sender, RoutedEventArgs e)
 
 :::
 
-### Change transition style
+### 切换过渡样式
 
-On the **Navigate()** method, there are a few overloads that allow you to pass a transition style. The following example shows how to apply the Drill-in transition style.
+在 **Navigate()** 方法中，有一些重载允许您传入过渡动画样式。以下示例演示如何使用 Drill-in 过渡样式。
 
 ```csharp
 using iNKORE.UI.WPF.Modern.Media.Animation;
@@ -208,17 +208,17 @@ private void Button_NavigateToPage1_Click(object sender, RoutedEventArgs e)
 }
 ```
 
-### Disable keyboard navigation
+### 禁用键盘导航
 
-Since the Frame has a built-in keyboard navigation, you may found out that you can use `Backspace`, `Page Down` and `Page Up` keys to navigate through the pages without your code control. Mostly this is not expected since the user would misact and back to another page that you're not expected, so we recommend you use the following way to disable it.
+由于 Frame 内置了键盘导航，您可能会发现即使没有代码控制，也可以通过 `Backspace`、`Page Down` 和 `Page Up` 在页面间导航。多数情况下这并不符合预期，因为用户可能误操作返回到不希望跳转的页面，因此建议通过以下方式禁用。
 
-First add a handler to the `Navigating` event of the Frame control:
+首先，为 Frame 控件的 `Navigating` 事件添加处理器：
 
 ```xml
 <ui:Frame x:Name="Frame_Main" Navigating="Frame_Main_Navigating"/>
 ```
 
-Create your own Navigate method and block the navigation if it's not expected like this:
+创建您自己的 Navigate 方法，并在非预期导航时进行拦截：
 
 ```csharp
 WeakReference __Frame_Main_NavigatingTarget = new WeakReference(null);
@@ -237,7 +237,7 @@ public void NavigateTo(object content, object? extraData = null, NavigationTrans
 }
 ```
 
-Then change your navigation code to use the new **NavigateTo()** method:
+然后将您的导航代码改为使用新的 **NavigateTo()** 方法：
 
 ```csharp
 private void Button_NavigateToPage1_Click(object sender, RoutedEventArgs e)
@@ -254,17 +254,17 @@ private void Button_NavigateToPage2_Click(object sender, RoutedEventArgs e)
 }
 ```
 
-Then try to use the keyboard to navigate through the pages, you'll find out that it's not working any more.
+然后尝试使用键盘在页面间导航，您会发现它不再生效。
 
 ## Members
 
-Here're the commonly used members of the Frame control. For a complete list of members, please check the [API definition](COMING_SOON).
+以下是 Frame 控件常用 Members。完整 Members 列表请查看 [API definition](COMING_SOON)。
 
 ### Navigate
 
-The **Navigate()** method navigates to the specified content. There are a few overloads that allow you to pass a transition style.
+**Navigate()** 方法用于导航到指定内容。它有多个重载，可以让您传入过渡样式。
 
-These are the extra overloads which we added for the Frame control:
+以下是我们为 Frame 控件新增的重载：
 
 ```csharp
 /// <summary>
@@ -324,11 +324,11 @@ public bool Navigate(object content, object extraData, NavigationTransitionInfo 
 public bool Navigate(Uri source, object extraData, NavigationTransitionInfo infoOverride);
 ```
 
-There're also many overloads presented in the original **Frame.Navigate** method, [click here](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.frame.navigate) to learn more.
+原始 **Frame.Navigate** 方法还提供了更多重载，详情请 [点击这里](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.frame.navigate)。
 
 ### GoBack
 
-The GoBack() method navigates to the most recent item in back navigation history, if a Frame manages its own navigation history.
+GoBack() 方法用于导航到返回历史中的最近一项（前提是 Frame 管理自己的导航历史）。
 
 ```csharp
 /// <summary>
@@ -339,35 +339,35 @@ The GoBack() method navigates to the most recent item in back navigation history
 public void GoBack(NavigationTransitionInfo transitionInfoOverride);
 ```
 
-You can call the **GoBack** method with or without the transition info like this:
+您可以在有或没有过渡信息的情况下调用 **GoBack**，例如：
 
 ```csharp
 // Without transitionInfoOverride, default transition will be used.
 Frame_Main.GoBack();
 ```
 
-or this:
+或者：
 
 ```csharp
 // With transitionInfoOverride, specified transition will be used.
 Frame_Main.GoBack(new DrillInNavigationTransitionInfo());
 ```
 
-## Remarks
+## 备注
 
-### Transitions
+### 过渡动画
 
-Page transitions provide visual feedback about the relationship between pages.
+页面过渡用于提供页面关系的视觉反馈。
 
 #### Entrance
 
-Page refresh is a combination of a slide up animation and a fade in animation for the incoming content. Use page refresh when the user is taken to the top of a navigational stack, such as navigating between tabs or left-nav items.
+Page refresh 是进入内容时“向上滑动 + 淡入”的组合动画。当用户回到导航栈顶部时（例如在标签页或左侧导航项之间切换），适合使用该动画。
 
-The desired feeling is that the user has started over.
+期望带给用户的感受是：重新开始。
 
 ![Page refresh](page-refresh.gif)
 
-The page refresh animation is represented by the EntranceNavigationTransitionInfo class.
+该动画由 EntranceNavigationTransitionInfo 类表示。
 
 ```csharp
 // Explicitly play the page refresh animation
@@ -376,19 +376,19 @@ myFrame.Navigate(Page_2, null, new EntranceNavigationTransitionInfo());
 
 :::note
 
-A Frame automatically uses NavigationThemeTransition to animate navigation between two pages. By default, the animation is page refresh.
+Frame 会自动使用 NavigationThemeTransition 为两个页面间的导航添加动画。默认动画为 page refresh。
 
 :::
 
 #### Drill
 
-Use drill when users navigate deeper into an app, such as displaying more information after selecting an item.
+当用户在应用中进入更深层级（例如选择项目后查看更详细信息）时，使用 drill 动画。
 
-The desired feeling is that the user has gone deeper into the app.
+期望带给用户的感受是：正在深入应用。
 
 ![Drill](drill.gif)
 
-The drill animation is represented by the DrillInNavigationTransitionInfo class.
+该动画由 DrillInNavigationTransitionInfo 类表示。
 
 ```csharp
 // Play the drill in animation
@@ -397,9 +397,9 @@ myFrame.Navigate(Page_2, null, new DrillInNavigationTransitionInfo());
 
 #### Slide
 
-Use slide transition to show that sibling pages appear next to each other. The NavigationView control automatically uses this animation for top nav, but if you are building your own horizontal navigation experience, then you can implement horizontal slide with SlideNavigationTransitionInfo.
+使用 slide 过渡可表达同级页面彼此相邻。NavigationView 控件在顶部导航时会自动使用这种动画；如果您在构建自己的水平导航体验，也可以用 SlideNavigationTransitionInfo 来实现横向滑动。
 
-The desired feeling is that the user is navigating between pages that are next to each other.
+期望带给用户的感受是：正在相邻页面之间切换。
 
 ```csharp
 // Navigate to the right, ie. from LeftPage to RightPage
@@ -414,18 +414,18 @@ myFrame.Navigate(BottomPage, null, new SlideNavigationTransitionInfo() { Effect 
 
 #### Suppress
 
-To avoid playing any animation during navigation, use SuppressNavigationTransitionInfo in the place of other NavigationTransitionInfo subtypes.
+如果希望导航过程中不播放任何动画，可使用 SuppressNavigationTransitionInfo 来替代其他 NavigationTransitionInfo 子类型。
 
 ```csharp
 // Suppress the default animation
 myFrame.Navigate(Page2, null, new SuppressNavigationTransitionInfo());
 ```
 
-Suppressing the animation is useful when implicit show/hide animations is used.
+当您使用隐式显示/隐藏动画时，禁用导航动画会很有用。
 
-## See also
+## 另请参阅
 
-## Related controls
+### 相关文章
 
 - [Components / NavigationView](./navigation-view)
 
