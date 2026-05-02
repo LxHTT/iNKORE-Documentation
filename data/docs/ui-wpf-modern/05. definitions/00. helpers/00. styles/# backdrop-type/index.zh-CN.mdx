@@ -1,0 +1,134 @@
+---
+description: 指定窗口材质类型。由 `WindowHelper.SystemBackdropType` 属性使用。
+---
+
+# BackdropType 枚举
+
+指定窗口材质类型。由 `WindowHelper.SystemBackdropType` 属性使用。
+
+## 定义
+
+- 命名空间： [iNKORE.UI.WPF.Modern.Helpers.Styles](.)
+- 程序集： iNKORE.UI.WPF.Modern.dll
+
+```csharp
+public enum BackdropType {...}
+```
+
+继承： [Object](https://learn.microsoft.com/zh-cn/dotnet/api/system.object) → [ValueType](https://learn.microsoft.com/zh-cn/dotnet/api/system.valuetype?view=windowsdesktop-8.0) → [Enum](https://learn.microsoft.com/zh-cn/dotnet/api/system.enum?view=windowsdesktop-8.0) → BackdropType
+
+## 枚举值
+
+### None
+
+不应用任何窗口材质，窗口保持实色。
+
+**值**：1
+
+### Mica
+
+窗口将使用 Mica 效果，表现为对桌面背景进行模糊与半透明处理的材质。
+
+**值**：2
+
+Mica 是 Windows 11 引入的一种新型不透明材质，表面会根据用户桌面背景色做细微着色。
+
+Mica 支持浅色/深色模式，并内置了针对窗口聚焦 (活动/非活动) 的状态差异。
+
+![](materials_mica_hero_1880.jpg)
+
+### Acrylic
+
+窗口将使用 Acrylic 效果，所用的具体 API 由系统版本决定，表现为模糊背景之上的半透明材质。
+
+**值**：3
+
+Acrylic 是一种半透明材质，模拟磨砂玻璃效果。在 Windows 11 中，Acrylic 更明亮、更透明，以便与背后的视觉内容建立更强的语境关系。Acrylic 通常用于临时、轻度消失的表面，例如弹出菜单与上下文菜单。
+
+Acrylic 支持浅色/深色模式。
+
+![](materials_acrylic_hero_1880.jpg)
+
+### Tabbed
+
+窗口将使用类似 Mica 的 Tabbed (Mica Alt) 效果，但色彩更深，通常用于窗口具有根 `TabControl` 的场景 (例如资源管理器) 。
+
+**值**：4
+
+Mica Alt (又称 Tabbed) 是 Mica 的一个变体，对用户桌面背景色做更强的着色。针对带有选项卡的标题栏应用 Mica Alt，可以提供比 Mica 更深的视觉层级。Mica Alt 在使用 Windows App SDK 1.1 及更高版本且运行于 Windows 11 版本 22000 或更高时可用。
+
+![](mica-alt-tabs.png)
+
+### Acrylic10
+
+使用较旧 API 实现的 Acrylic 效果。
+
+**值**：5
+
+### Acrylic11
+
+使用较新 API 实现的 Acrylic 效果。
+
+**值**：6
+
+## 备注
+
+### Acrylic10 与 Acrylic11
+
+尽管 Acrylic10 与 Acrylic11 在视觉效果上相似，但它们使用不同的 API，存在一些差异：
+
+|                   | Acrylic10                                                            | Acrylic11                                                                           |
+|-------------------|----------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| 可用性            | <font color="seagreen">Windows 10 与 11 (Windows 10.0.17063+) </font> | Windows 11 (Windows 10.0.22523+)                                                    |
+| 性能              | 调整窗口大小时可能有卡顿                                               | <font color="seagreen">调整窗口大小时表现良好</font>                                                      |
+| 可定制性          | <font color="seagreen">可定制色调 (使用 ui:WindowHelper.Acrylic10Color 属性) </font> | 不支持                                                                                |
+| 过渡              | 无                                                                   | <font color="seagreen">在切换浅/深色及聚焦/失焦时会显示过渡动画</font>                                   |
+| 失去焦点时        | <font color="seagreen">Acrylic 效果仍然保留</font>                                      | Acrylic 效果会被临时禁用                                                              |
+
+如上所示，两个 Acrylic 效果各有优缺点，可根据需求选择。
+
+### Mica 与 Tabbed
+
+Mica 与 Tabbed 在外观上相似，但用途不同：Mica 适用于一般窗口，Tabbed 适用于带根 `TabControl` 的窗口。
+
+下面图片展示了带选项卡的标题栏中 Mica 与 Mica Alt (Tabbed) 的差异。
+
+![](mica-tabs.png)
+
+![](mica-alt-tabs.png)
+
+### 系统级特性
+
+窗口材质由系统提供并由系统管理，这意味着我们并不自行实现背景效果或对其有完全控制权。我们所能做的是请求系统对窗口应用相应的背景效果。
+
+:::danger 注意
+
+请不要要求我们做超出我们控制范围的操作。例如：提升 Acrylic10 的性能、强制对某个控件应用材质、或更改 Acrylic11 的颜色。我们无法实现这些功能。如遇窗口材质问题，请向 Microsoft 报告。
+
+如果你的想法在其他 Win32 应用中不可行，在我们的库中也不会可行。我们使用的是其他 Win32 应用同样的 API。在提出请求前，请先确认该行为在其他 Win32 应用中是否可行。
+
+:::
+
+## 另请参阅
+
+### 相关文章
+
+- [组件 / Window](%BASE_NAME%/components/dialogs/window#system-backdrops)
+
+- [定义 / WindowHelper Class](%BASE_NAME%/definitions/controls/helpers/window-helper#systembackdroptype)
+
+- [定义 / Acrylic10Helper Class](%BASE_NAME%/definitions/controls/helpers/acrylic10-helper)
+
+- [定义 / BackdropHelper Class](%BASE_NAME%/definitions/controls/helpers/backdrop-helper)
+
+### Microsoft Learn
+
+- [Mica material - Windows Apps](https://learn.microsoft.com/zh-cn/windows/apps/design/style/mica)
+
+- [Acrylic material - Windows Apps](https://learn.microsoft.com/zh-cn/windows/apps/design/style/acrylic)
+
+- [Materials in Windows 11](https://learn.microsoft.com/zh-cn/windows/apps/design/signature-experiences/materials)
+
+### 源代码
+
+- [GitHub | BackdropHelper.cs](https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/source/iNKORE.UI.WPF.Modern/Helpers/Styles/BackdropHelper.cs#L18)

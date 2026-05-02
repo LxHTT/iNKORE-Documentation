@@ -1,0 +1,165 @@
+---
+description: 提供窗口组件的附加属性和样式管理。
+---
+
+
+# WindowHelper 类
+
+提供用于窗口组件的附加属性与样式管理。
+
+## 定义
+
+- 命名空间： [iNKORE.UI.WPF.Modern.Controls.Helpers](.)
+- 程序集： iNKORE.UI.WPF.Modern.dll
+
+```csharp
+public static class WindowHelper {...}
+```
+
+静态类，无继承关系。
+
+## 依赖属性
+
+### UseModernWindowStyle
+
+获取或设置是否对窗口应用现代窗口样式。现代窗口样式为窗口提供现代外观与交互体验。
+
+仅当将此值设为 `true` 时，下列属性才会生效。
+
+- 属性：附加属性
+- 类型：`bool`
+- 默认值：`false`
+
+### SystemBackdropType
+
+获取或设置窗口材质类型。可从 [BackdropType 枚举](%BASE_NAME%/definitions/helpers/styles/backdrop-type) 中选择。
+
+:::warning 系统兼容性
+
+上文列出了 Acrylic 背景的可用性。Mica 与 Tabbed 背景仅在 Windows 11 可用；在较旧的 Windows 版本上，这些窗口材质将不会生效。
+
+选项 **Acrylic** 会根据系统版本自动选择合适的 API：在 Windows 11 上使用 Acrylic11，在 Windows 10 上使用 Acrylic10，但这可能会引发一些不期望的行为。
+
+:::
+
+- 属性：附加属性
+- 类型：[BackdropType](%BASE_NAME%/definitions/helpers/styles/backdrop-type)
+- 默认值：`BackdropType.None`
+
+### Acrylic10Color
+
+获取或设置 Acrylic10 背景的颜色。仅在 **SystemBackdropType** 为 `Acrylic10` 或在 Windows 10 上以 `Acrylic` 运行时生效。你可以通过设置 **Color** 值来自定义 Acrylic10 背景颜色。
+
+:::warning 使用 Color 值而非 Brush
+
+该属性仅接受 **Color** 值，若传入 **Brush** 值将抛出异常。如需从 **Brush** 转为 **Color**，可使用 **iNKORE.UI.WPF.Converters.ColorToBrushConverter** (需逆向转换) 。
+
+:::
+
+- 属性：附加属性
+- 类型：`Color`
+- 默认值：`Color.FromArgb(0x99, 0x00, 0x00, 0x00)`
+
+### ApplyBackground
+
+决定是否将 `Background` 属性应用于窗口。若将此属性设为 `False`，窗口将忽略 `Background` 并不渲染背景。通常我们会根据所用的窗口材质自动设置此属性，你也可手动控制，但该操作并不常见。
+
+- 属性：附加属性
+- 类型：`bool`
+- 默认值：`true` (当 **SystemBackdropType** 为 `None` 时为 `True`，否则为 `False`) 
+
+### ApplyNoise
+
+决定是否为窗口启用噪点效果。噪点是一种细微的纹理效果，可让窗口看起来更自然、不那么平面。默认值为 `False`，因为在使用 acrylic 背景时系统会覆盖噪点效果，故通常无需重复渲染。
+
+你也可以手动将其设为 `True` 以启用额外噪点效果。
+
+- 属性：附加属性
+- 类型：`bool`
+- 默认值：`false`
+
+### CornerStyle
+
+通过此属性设置窗口的圆角样式。可从 [WindowCornerStyle 枚举](../../definitions/helpers/styles/window-corner-style) 中选择。
+
+:::warning 系统兼容性
+
+圆角样式仅在 Windows 11 可用；在较旧系统上该设置不会生效。
+
+:::
+
+- 属性：附加属性
+- 类型：[WindowCornerStyle](../../helpers/styles/window-corner-style)
+- 默认值：`WindowCornerStyle.None`
+
+### FixMaximizedWindow
+
+决定是否对窗口应用额外的最大化修复器 (maximize fixer) 。该修复器用于修正默认窗口样式导致的最大化尺寸错误问题。
+
+该修复有时可能触发一些异常；通常这些异常是无害的，不会影响窗口的正常使用。
+
+更多信息见 [Window / Maximize fixer](%BASE_NAME%/components/dialogs/window#maximize-fixer)。
+
+- 属性：附加属性
+- 类型：`bool`
+- 默认值：`true`
+
+### ShouldDisplayManualBorder
+
+决定是否显示手动绘制的边框。手动边框由窗口绘制，遵循窗口的 `BorderBrush` 与 `BorderThickness`，从而允许自定义窗口边框样式。
+
+该属性为只读，由系统版本决定：在 Windows 11 及更高版本，DWM 会自动绘制边框；在 Windows 10 或更低版本，将显示手动边框。
+
+- 属性：附加属性 | 只读
+- 类型：`bool`
+- 默认值：`false` (在 Windows 10 或更低版本为 `True`，否则为 `False`) 
+
+### ~~UseAeroBackdrop~~
+
+已废弃，请使用 **SystemBackdropType**。
+
+### ~~UseAcrylicBackdrop~~
+
+已废弃，请使用 **SystemBackdropType**。
+
+## 字段
+
+###  (依赖属性) 
+
+上述依赖属性各自对应一个 `DependencyProperty` 字段。
+
+## 方法
+
+###  (依赖属性) 
+
+对可写的附加依赖属性，类提供对应的 `Get` 与 `Set` 方法；对只读附加依赖属性，仅提供 `Get` 方法。
+
+### UpdateWindowChrome
+
+当需要更新 `WindowChrome` 时，该方法会被自动调用；你也可以手动调用以在异常情况发生后触发更新。
+
+```csharp
+public static WindowChrome UpdateWindowChrome(this Window window);
+```
+
+## 备注
+
+### 组件
+
+该类用于自定义 [Window](%BASE_NAME%/components/dialogs/window) 组件。
+
+## 另请参阅
+
+### 相关文章
+
+- [组件 / Window](%BASE_NAME%/components/dialogs/window)
+
+### Microsoft Learn
+
+- [Window Class (WPF)](https://learn.microsoft.com/zh-cn/dotnet/api/system.windows.window?view=windowsdesktop-8.0#properties)
+
+- [Materials in Windows 11](https://learn.microsoft.com/zh-cn/windows/apps/design/signature-experiences/materials)
+
+### 源代码
+
+- [GitHub | WindowHelper.cs](https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/source/iNKORE.UI.WPF.Modern/Controls/Helpers/WindowHelper.cs)

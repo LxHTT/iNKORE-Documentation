@@ -1,0 +1,113 @@
+# ToggleSwitch 类
+
+表示一个可在两种状态之间切换的开关控件。
+
+更多信息、设计指引与代码示例，请参阅 [Toggle switches](%BASE_NAME%/components/basic-input/toggle-switch)。
+
+## 定义
+
+- 命名空间： [iNKORE.UI.WPF.Modern.Controls](.)
+
+- 程序集： iNKORE.UI.WPF.Modern.dll
+
+- 继承： [Object](https://learn.microsoft.com/zh-cn/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/zh-cn/dotnet/api/system.windows.controls.control) → ToggleSwitch
+
+```csharp
+[ContentProperty(nameof(Header))]
+[TemplatePart(Name = nameof(HeaderContentPresenter), Type = typeof(ContentPresenter))]
+[TemplatePart(Name = nameof(SwitchKnobBounds), Type = typeof(FrameworkElement))]
+[TemplatePart(Name = nameof(SwitchKnob), Type = typeof(FrameworkElement))]
+[TemplatePart(Name = nameof(KnobTranslateTransform), Type = typeof(TranslateTransform))]
+[TemplatePart(Name = nameof(SwitchThumb), Type = typeof(Thumb))]
+[TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateNormal)]
+[TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateMouseOver)]
+[TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StatePressed)]
+[TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateDisabled)]
+[TemplateVisualState(GroupName = ContentStatesGroup, Name = OffContentState)]
+[TemplateVisualState(GroupName = ContentStatesGroup, Name = OnContentState)]
+[TemplateVisualState(GroupName = ToggleStatesGroup, Name = DraggingOnState)]
+[TemplateVisualState(GroupName = ToggleStatesGroup, Name = DraggingOffState)]
+[TemplateVisualState(GroupName = ToggleStatesGroup, Name = OffState)]
+[TemplateVisualState(GroupName = ToggleStatesGroup, Name = OnState)]
+public class ToggleSwitch : Control { ... }
+```
+
+## 构造函数
+
+### ToggleSwitch()
+
+初始化 `ToggleSwitch` 的新实例。
+
+## 属性
+
+### IsOn
+
+获取或设置 `ToggleSwitch` 的开关状态 (开/关) 。
+
+- 属性：依赖属性
+
+- 类型：`bool`
+
+- 默认值：`false`
+
+### [On/Off]-[Content/ContentTemplate]
+
+默认情况下，`ToggleSwitch` 包含自动本地化的 On/Off 标签。你可以通过设置 `OnContent` 与 `OffContent` 来替换这些标签。
+
+下面示例将 On/Off 标签替换为 Show/Hide：
+
+```xml
+<ToggleSwitch x:Name="imageToggle" Header="Show images" OffContent="Show" OnContent="Hide"
+    Toggled="ToggleSwitch_Toggled"/>
+```
+
+下面示例移除了标签：
+
+```xml
+<ToggleSwitch OffContent="" OnContent="" Toggled="ToggleSwitch_Toggled"/>
+```
+
+你也可以通过设置 `OnContentTemplate` 与 `OffContentTemplate` 来使用更复杂的内容。
+
+###  (继承) 
+
+该类继承自基类 `Control` 的属性。
+
+## 事件
+
+### Toggled
+
+当 `IsOn` 属性值更改时触发该事件。
+
+- 事件类型：Routed
+
+- 委托类型：`RoutedEventHandler`
+
+###  (继承) 
+
+该类继承自基类 `Control` 的事件。
+
+## 方法
+
+###  (继承) 
+
+该类继承自基类 `Control` 的方法。
+
+
+## 另请参阅
+
+### 相关文章
+
+- [组件 / ToggleSwitch](%BASE_NAME%/components/basic-input/toggle-switch)
+
+### Microsoft Learn
+
+- [Toggle switches - Windows apps](https://learn.microsoft.com/zh-cn/windows/apps/design/controls/toggles)
+
+- [ToggleSwitch class (WinRT)](https://learn.microsoft.com/zh-cn/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.toggleswitch)
+
+### 源代码
+
+- [GitHub | ToggleSwitch.cs](https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/source/iNKORE.UI.WPF.Modern.Controls/Controls/Windows/ToggleSwitch/ToggleSwitch.cs)
+
+

@@ -1,0 +1,8 @@
+{
+  "label": "主题",
+  "link": 
+    {
+        "type": "generated-index",
+        "description": "主题指定了组件的颜色、表面的深浅、阴影的程度、墨迹元素的适当不透明度等。"
+    }
+}

@@ -1,0 +1,81 @@
+---
+description: 指定窗口的圆角样式。由 `WindowHelper.CornerStyle` 属性使用。
+---
+
+# WindowCornerStyle 枚举
+
+指定窗口的圆角样式。由 `WindowHelper.CornerStyle` 属性使用。
+
+## 定义
+
+- 命名空间： [iNKORE.UI.WPF.Modern.Helpers.Styles](.)
+
+- 程序集： iNKORE.UI.WPF.Modern.dll
+
+```csharp
+public enum WindowCornerStyle : uint {...}
+```
+
+继承： [Object](https://learn.microsoft.com/zh-cn/dotnet/api/system.object) → [ValueType](https://learn.microsoft.com/zh-cn/dotnet/api/system.valuetype?view=windowsdesktop-8.0) → [Enum](https://learn.microsoft.com/zh-cn/dotnet/api/system.enum?view=windowsdesktop-8.0) → WindowCornerStyle
+
+## 枚举值
+
+### Default
+
+让系统决定是否应用窗口圆角。
+
+*等价于 DWMWCP_DEFAULT*
+
+**值**：0
+
+### DoNotRound
+
+从不应用窗口圆角。
+
+*等价于 DWMWCP_DONOTROUND*
+
+**值**：1
+
+### Round
+
+在适当情况下应用窗口圆角。
+
+*等价于 DWMWCP_ROUND*
+
+**值**：2
+
+### RoundSmall
+
+在适当情况下应用小一些的窗口圆角。
+
+*等价于 DWMWCP_ROUNDSMALL*
+
+**值**：3
+
+## 备注
+
+要使用 Windows 11 引入的圆角特性，请查看该功能的官方说明。
+
+ (本文档日期为 2020/10/02，但实际提交于 2021/07/17。) 
+
+关键常量的底层值 (例如 DWMWA_WINDOW_CORNER_PREFERENCE 及 DWM_WINDOW_CORNER_PREFERENCE 枚举) 可在包含于 Windows Insider Preview SDK 的 dwmapi.h 中找到。
+
+当窗口应用圆角时，系统会自动添加一条灰色轮廓。
+
+在版本 10.0.22000.100 中，圆角未应用抗锯齿处理，边缘会显得较为锯齿 (标准标题栏除外) 。
+
+## 另请参阅
+
+### 相关文章
+
+- [组件 / Window](%BASE_NAME%/components/dialogs/window)
+
+- [定义 / WindowHelper Class](%BASE_NAME%/definitions/controls/helpers/window-helper#cornerstyle)
+
+### Microsoft Learn
+
+- [Apply rounded corners in desktop apps for Windows 11](https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/apply-rounded-corners)
+
+### 源代码
+
+- [GitHub | CornerHelper.cs#L309](https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/source/iNKORE.UI.WPF.Modern/Helpers/Styles/CornerHelper.cs#L309)
