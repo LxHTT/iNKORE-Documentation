@@ -8,7 +8,7 @@ The Window class in represents a window in a Windows application. It provides a 
 
 - **Class**: [System.Windows](https://learn.microsoft.com/en-us/dotnet/api/system.windows)[.Window](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.button)
 
-- **Inheritance**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) → [Window](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.window)
+- **Inheritance**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) → [Window](https://learn.microsoft.com/en-us/dotnet/api/system.windows.window)
 
 ## Examples
 
@@ -55,13 +55,13 @@ The window is always using the default style and native frames unless you apply 
 
 ### System backdrops
 
-Since Windows 10, there are a few system-level backdrops that can be applied to the window. You can use **ui:WindowHelper.SystemBackdrop** property to apply the backdrop. For example, you can apply the Mica effect with the following code:
+Since Windows 10, there are a few system-level backdrops that can be applied to the window. You can use **ui:WindowHelper.SystemBackdropType** property to apply the backdrop. For example, you can apply the Mica effect with the following code:
 
 ```ini
 ui:WindowHelper.SystemBackdropType="Mica"
 ```
 
-![Window with mica effect](with-mica-effect.jpg)
+![Window with Mica effect](with-mica-effect.jpg)
 
 ### Back button in title bar
 

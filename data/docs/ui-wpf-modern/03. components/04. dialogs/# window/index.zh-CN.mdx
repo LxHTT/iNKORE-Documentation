@@ -1,14 +1,14 @@
 ---
-description: "提供了创建、配置、显示不管理窗口和对话框的生命周期的能力。"
+description: "提供了创建、配置、显示并管理窗口和对话框的生命周期的能力。"
 ---
 
 # Window
 
-Window 类代表 Windows 应用程序中的一个窗口。它提供了一套丰富的功能来管理和与窗口互动，例如处理其内容、外观和行为。本文档涵盖了 Window 类的基本方面，执其属性、方法和事件。
+Window 类代表 Windows 应用程序中的一个窗口。它提供了一套丰富的功能来管理和与窗口互动，例如处理其内容、外观和行为。本文档涵盖了 Window 类的基本方面，及其属性、方法和事件。
 
-- **类**: [System.Windows](https://learn.microsoft.com/en-us/dotnet/api/system.windows)[.Window](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.button)
+- **类**: [System.Windows](https://learn.microsoft.com/en-us/dotnet/api/system.windows)[.Window](https://learn.microsoft.com/en-us/dotnet/api/system.windows.window)
 
-- **继承**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) → [Window](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.window)
+- **继承**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) → [Window](https://learn.microsoft.com/en-us/dotnet/api/system.windows.window)
 
 ## 示例
 
@@ -55,13 +55,13 @@ myWindow.Show();
 
 ### 窗口材质
 
-自 Windows 10 以来，有一些系统级窗口材质可以应用于窗口。您可以使用 **ui:WindowHelper.SystemBackdrop** 属性来应用材质。例如，您可以使用以下代码应用 Mica 效果：
+自 Windows 10 以来，有一些系统级窗口材质可以应用于窗口。您可以使用 **ui:WindowHelper.SystemBackdropType** 属性来应用材质。例如，您可以使用以下代码应用 Mica 效果：
 
 ```ini
 ui:WindowHelper.SystemBackdropType="Mica"
 ```
 
-![Window with mica effect](with-mica-effect.jpg)
+![Window with Mica effect](with-mica-effect.jpg)
 
 ### 标题栏中的返回按钮
 
@@ -133,7 +133,7 @@ public partial class MainWindow : Window
 
 ### 管理属性
 
-为了提供最佳的外观和感受，我们需要接管窗口的 WindowChrome 以一上根据您的需要进行更改。因此，应用现代样式后，您不应此接修改窗口的 WindowChrome，基于相同的原因，您也不应修改以下属性：
+为了提供最佳的外观和体验，我们需要接管窗口的 WindowChrome 并对其进行必要的调整。因此，在应用现代样式后，您不应再修改窗口的 WindowChrome；出于同样的原因，也不应修改以下属性：
 
 - WindowChrome.WindowChrome
 
