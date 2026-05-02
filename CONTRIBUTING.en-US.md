@@ -135,7 +135,7 @@ Instead, write like this for better readability:
 
 This guide aims to provide a clear and comprehensive overview of the document structure for (potential) contributors like you. It covers naming conventions, file structure, and specific rules for writing documents.
 
-If you have any questions, you can submit an issue on Github, join our community, or contact us directly via [email](mailto://notyoojun@outlook.com). If there's anything unclear in this article, feel free to tell us or submit a Pull Request. We greatly appreciate your valuable work, which makes the documentation center better!
+If you have any questions, you can submit an issue on GitHub, join our community, or contact us directly via [email](mailto://notyoojun@outlook.com). If there's anything unclear in this article, feel free to tell us or submit a Pull Request. We greatly appreciate your valuable work, which makes the documentation center better!
 
 <br/>
 
