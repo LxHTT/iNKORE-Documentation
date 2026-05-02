@@ -112,7 +112,7 @@
 
 打开根目录中的 `App.xaml` 文件，并添加命名空间声明：
 
-```xml
+```ini
 xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
 ```
 
@@ -153,13 +153,13 @@ xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
 
 让我们将现代样式应用到主窗口。转到 `MainWindow.xaml`，首先添加命名空间声明：
 
-```xml
+```ini
 xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
 ```
 
 然后通过应用此附加属性让窗口使用现代样式：
 
-```xml
+```ini
 ui:WindowHelper.UseModernWindowStyle="True"
 ```
 
@@ -171,7 +171,7 @@ ui:WindowHelper.UseModernWindowStyle="True"
 
 现在，如果您运行该应用，您可以看到窗口具有现代风格的框架。您还可以使用 `ui:WindowHelper.SystemBackdropType` 属性向窗口添加材质：
 
-```xml
+```ini
 ui:WindowHelper.SystemBackdropType="Mica"
 ```
 
