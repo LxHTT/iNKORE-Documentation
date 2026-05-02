@@ -101,7 +101,7 @@ launcher-home/
 
 ### Space between latin and other characters
 
-For some language-specified documents (e.g. Chinese), it's essential to use spaces between [Chinese] and [English/letters/numbers/minor-symbols]. 
+For some language-specified documents (e.g. Chinese), it's essential to use spaces between [Chinese] and [English/letters/numbers/minor-symbols].
 
 ### Always use English symbols (with exceptions)
 
@@ -113,7 +113,7 @@ For short date, please use `MM/dd/yyyy` format (e.g `05/02/2024`). for long date
 
 For time, always follow `HH:mm` or `HH:mm:ss` rule (e.g. `16:20`, `08:06:45`). **The military time** (24-hour clock) will always be used.
 
-The rules above applies to all documents and all locales, no matter what language the document is. 
+The rules above applies to all documents and all locales, no matter what language the document is.
 
 ### Example
 
