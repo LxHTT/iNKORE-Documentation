@@ -1,0 +1,167 @@
+---
+description: "Windows apps can use a light or dark application theme. The theme affects the colors of the app's background, text, icons, and common controls."
+title: "Theme Schemes"
+---
+
+
+# 主题方案 (亦称主题模式) 
+
+Windows 应用可以使用浅色或深色的应用主题。主题会影响应用的背景、文本、图标以及常用控件的配色。
+
+:::note
+
+本文讨论的是主题方案 (浅色/深色) 。如果你想了解强调色 (又称主色) ，请参见 [Theming / Accent Color](./accent-color)。
+
+:::
+
+## 可用方案
+
+所有控件都提供两种调色模式：浅色 (默认) 和深色。
+
+### 浅色
+
+浅色主题为默认主题模式，常用于大多数应用，设计上以护眼为目标，提供背景与前景之间良好的对比度。浅色主题适用于光线充足的环境，且推荐在对比度要求较高或有视力障碍的场景中使用。
+
+![Button Page in light mode](gallery-button-light.png)
+
+### 深色
+
+深色主题适用于光线较暗的环境，提供背景与前景之间更高的对比度，便于在夜间或昏暗房间中阅读文本和识别图标。
+
+![Button Page in dark mode](gallery-button-dark.png)
+
+## 更改主题值
+
+默认情况下，应用的主题遵循用户在 Windows 设置中的偏好或设备的默认主题。你也可以为你的应用单独设置主题。
+
+### 使用 ThemeResources (静态且全局) 
+
+当你使用全局的 **ThemeResources** 时，可以通过 `RequestedTheme` 属性在 XAML 中设置应用的默认主题模式。示例 `App.xaml` 如下：
+
+```ini
+RequestedTheme="Dark"
+```
+
+```xml title="App.xaml"
+<Application x:Class="WpfApp1.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfApp1" 
+             xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemeResources RequestedTheme="Dark"/>
+                <ui:XamlControlsResources/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+```
+
+若希望遵循系统设置，可将其设置为空值：
+
+```ini
+RequestedTheme="{x:Null}"
+```
+
+### 使用 ThemeManager.Current (动态且全局) 
+
+若需在运行时动态切换主题，可以使用 **ThemeManager.Current.ApplicationTheme**：
+
+```csharp
+ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+```
+
+例如，一个主题切换按钮的实现如下：
+
+```xml
+<Button x:Name="Button_ToggleTheme" Content="Toggle Theme" Click="Button_ToggleTheme_Click"/>
+```
+
+```csharp
+private void Button_ToggleTheme_Click(object sender, RoutedEventArgs e)
+{
+    if (ThemeManager.Current.ApplicationTheme == ApplicationTheme.Dark)
+    {
+        ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+    }
+    else
+    {
+        ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+    }
+}
+```
+
+若希望遵循系统设置，可将其设置为 `null`：
+
+```csharp
+ThemeManager.Current.ApplicationTheme = null;
+```
+
+### 使用 ThemeManager 附加属性 (局部) 
+
+若只想为某个控件局部切换主题，可使用 **ThemeManager.Theme** 附加属性，例如：
+
+```ini
+ui:ThemeManager.RequestedTheme="Dark"
+```
+
+示例：
+
+```xml
+<ui:SimpleStackPanel Orientation="Horizontal" Spacing="10">
+    <Border ui:ThemeManager.RequestedTheme="Light">
+        <ui:SimpleStackPanel Margin="10" Spacing="10">
+            <Button Content="Normal controls"/>
+            <CheckBox Content="in light mode!"/>
+        </ui:SimpleStackPanel>
+    </Border>
+    <Border ui:ThemeManager.RequestedTheme="Dark" Grid.Column="1"
+        Background="{DynamicResource {x:Static ui:ThemeKeys.ApplicationPageBackgroundThemeBrushKey}}">
+        <ui:SimpleStackPanel Margin="10" Spacing="10">
+            <Button Content="Dark controls"/>
+            <CheckBox Content="in light mode!"/>
+        </ui:SimpleStackPanel>
+    </Border>
+</ui:SimpleStackPanel>
+```
+
+![Dark controls in light mode](dark-in-light-mode.png)
+
+若希望遵循系统设置，可将其设置为默认：
+
+```ini
+ui:ThemeManager.RequestedTheme="Default"
+```
+
+## 备注
+
+### 默认值
+
+如果未指定主题或使用默认值，应用将遵循系统设置。
+
+:::warning 有时例外
+
+在某些情况下，应用可能无法遵循系统设置，通常是因为 WinRT 设置读取器不可用，例如：
+
+- 应用运行在 Windows 7/8/8.1 或较旧的 Windows 10 版本；
+- 项目设置中的目标操作系统版本低于 `windows10.0.18362.0`。
+
+:::
+
+## 另请参阅
+
+### 相关文章
+
+- [Theming / Accent color](./accent-color)
+
+### Microsoft Learn
+
+- [Color in Windows apps](https://learn.microsoft.com/en-us/windows/apps/design/style/color)
+
+- [Color in Windows 11](https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/color)
+
+- [Layering and elevation in Windows 11](https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/layering)
+

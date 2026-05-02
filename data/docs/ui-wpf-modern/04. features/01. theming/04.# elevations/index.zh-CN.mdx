@@ -1,0 +1,59 @@
+# 层级 (Elevation) 
+
+层级表示表面与另一表面在桌面上位置关系的深度分量。当两个或多个对象占据屏幕上的同一位置时，只有层级最高的对象会在该位置被渲染。
+
+在控件和表面上使用阴影与轮廓 (边缘) 可以微妙地传达对象的层级，并在交互过程中帮助引导焦点。Windows 11 使用阴影与轮廓来表达层级感以及相关的数值与效果。
+
+## 轮廓层级 (Contour elevation) 
+
+以 `Button` 控件为例，其边框底部带有高亮以产生深度感。下面是带有层级与不带层级的 `Button` 对比：
+
+![Button with and without elevation](button-with-and-without-elevation.png)
+
+### 适用控件
+
+- [Button](%BASE_NAME%/components/basic-input/button)、[ToggleButton](%BASE_NAME%/components/basic-input/toggle-button)、[RepeatButton](%BASE_NAME%/components/basic-input/repeat-button)、[DropDownButton](%BASE_NAME%/components/basic-input/dropdown-button)、[SplitButton](%BASE_NAME%/components/basic-input/split-button)、[ToggleSplitButton](%BASE_NAME%/components/basic-input/toggle-split-button)
+
+- [TextBox](%BASE_NAME%/components/text/text-box)、[RichTextBox](%BASE_NAME%/components/text/richtext-box)、[PasswordBox](%BASE_NAME%/components/text/password-box)、[NumberBox](%BASE_NAME%/components/text/number-box)、[AutoSuggestBox](%BASE_NAME%/components/text/autosuggest-box)
+
+### 应用方式
+
+可以使用 `ElevationBorder` 控件在任意位置添加层级效果。
+
+更多信息请参见 [ElevationBorder Control](%BASE_NAME%/components/media/elevation-border)。
+
+### 自定义
+
+可以使用 `ui:ElevationBorder` 的附加属性来自定义控件的层级。例如，下面的代码会移除 `Button` 的层级效果：
+
+```xml
+<Button Content="No Elevation" ui:ElevationBorder.IsElevationEnabled="False"/>
+```
+
+你还可以指定颜色、不透明度、阴影方向等更多参数。详情请参见 [ElevationBorder Class](%BASE_NAME%/definitions/controls/elevation-border)。
+
+## 阴影层级 (Shadow elevation) 
+
+阴影层级通过为元素添加细腻的阴影效果来实现，从而产生该元素抬升或悬浮于表面之上的视觉错觉。这一技术常用于增强界面元素之间的视觉深度与分离感。
+
+![Layering elevation hero](layering_elevation_hero.jpg)
+
+在 Windows 11 的 Fluent Design 体系中，阴影层级是重要组成部分，旨在营造更沉浸和吸引人的用户体验。Windows 11 所使用的阴影层级数值经过精心设计，以便在不同 UI 组件间保持一致且美观的外观。
+
+通过对卡片、面板和对话框等元素应用阴影层级，可以提升它们的视觉层次，使其从背景中突出，帮助用户快速识别可交互元素并理解界面结构。
+
+### 适用控件
+
+所有表示对话框、弹出 (包括菜单) 或卡片的控件都应具有阴影层级。
+
+### 应用方式
+
+可以使用 `DropShadowPanel` 控件为窗口中的控件添加阴影层级。更多信息请参见 [DropShadowPanel Control](%BASE_NAME%/components/media/dropshadow-panel)。
+
+系统会自动为所有对话框、弹出和菜单 (均视作窗口) 应用阴影层级。
+
+## 另请参阅
+
+### Microsoft Learn
+
+- [Layering and elevation in Windows 11](https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/layering)

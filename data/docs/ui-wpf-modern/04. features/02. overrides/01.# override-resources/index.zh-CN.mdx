@@ -1,21 +1,21 @@
-# Override Resources
+# 重写资源
 
-The methods we're talking about is onew way to customize your application.
+本文介绍了一种自定义应用外观和行为的方法：重写资源 (Override Resources) 。
 
-## Why do so
+## 为什么要重写资源
 
-For example, now you want to change the background color of the Button to red. Generally, you can do this by setting the `Background` property of the Button to `Red` like this:
+例如，你希望将 `Button` 的背景颜色改为红色。通常你可以直接设置 `Background` 属性：
 
 ```xml
 <Button Content="I'm trying to be hot!"
     Background="Red" BorderBrush="DarkRed"/>
 ```
 
-This may look okay at first glance, but the problem appears when you move your cursor over the Button. All your own settings will be overridden by the default style. To fix this, you might come up with a solution: specify the hover color and the pressed color as well.
+乍一看这似乎没问题，但当将鼠标移动到按钮上时会出现问题：默认样式的触发器会重写你设置的颜色。为了解决这个问题，你可能会想到同时指定悬停 (hover) 和按下 (pressed) 时的颜色。
 
 ![Directly use Background property](directly-specify-property-value.gif)
 
-Think about it. It seems that there's no way to directly pass the values to the style. But in fact, there is. Now scroll up and check the **ControlTemplate.Triggers** section of the [Button.xaml](https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/source/iNKORE.UI.WPF.Modern/Themes/Controls/Button.xaml) file:
+看下 `Button.xaml` 的 **ControlTemplate.Triggers** 部分 (位于项目源代码中) ：
 
 ```xml title="Button.xaml"
 <Style x:Key="DefaultButtonStyle" TargetType="Button">
@@ -64,15 +64,15 @@ Think about it. It seems that there's no way to directly pass the values to the 
 </Style>
 ```
 
-The colors are not hard-coded, but are set by the `DynamicResource` markup extension. Now you got it? The `DynamicResource` markup extension is a way to make the style customizable by allowing you to override the default values. Now you may understand why we use the `DynamicResource` markup extension instead of hard-coding the values.
+这些颜色并非硬编码，而是通过 `DynamicResource` 标记扩展设置的。`DynamicResource` 允许你通过重写资源键来定制样式，这就是为什么模板使用 `DynamicResource` 而非硬编码颜色值的原因。
 
-## How to do so
+## 如何重写资源
 
-### Override a single resource
+### 重写单个资源
 
-In the FrameworkElement class, you may find a property called **Resources**. This property is a dictionary that contains the resources of the element which will be applied to the element itself and its children. To override a resource, you can add a new resource to the dictionary with the same key. How can I get the keys? Using the `ui:ThemeKeys` class and `x:Static` extension is thew best idea.
+在 `FrameworkElement` 类中有一个 `Resources` 属性，它是一个字典，包含该元素及其子元素可使用的资源。要重写某个资源，只需在对应字典中添加相同键的新资源。获取键的推荐方式是使用 `ui:ThemeKeys` 类结合 `x:Static`。
 
-You can override the resources by adding a new resource to the dictionary with the same key. For example, making the button green when the mouse is over it will be like this:
+例如，下面示例在鼠标悬停时将按钮背景改为绿色：
 
 ```xml
 <Button Content="I'm trying to be hot!"
@@ -85,21 +85,19 @@ You can override the resources by adding a new resource to the dictionary with t
 </Button>
 ```
 
-Now when you move your cursor over the Button, the background color will be green. In this way you can override all the resources (Colors, Brush, Thickness, Double, Animation, etc.) that is not hard-coded for any controls you want.
+这样当鼠标移动到按钮上时，背景颜色就会变为绿色。以此方法，你可以重写任意未被硬编码的资源 (颜色、画刷、厚度、Double、动画等) 。
 
 ![](make-hover-green.gif)
 
-:::info It's a pity that...
+:::info 小许缺憾
 
-When in Visual Studio, you may find that the IntelliSense doesn't work well with the `x:Static` extension in the `x:Key` attribute. But don't worry, it's just a bug of Visual Studio. The code will work well when you run the app, though this bug may make you feel uncomfortable.
-
-If Visual Studio staff are reading this, please fix this bug. Thanks in advance.
+在 Visual Studio 中，`x:Static` 用于 `x:Key` 时 IntelliSense 有时体验不佳，但这只是编辑器的问题，运行时代码仍然有效。
 
 :::
 
-### Override multiple resources
+### 重写多个资源
 
-In this way, you can override multiple resources for multiple elements. When the resources are overridden, the new values will be applied to the elements and their children. For example, you can make all the buttons green when the mouse is over, and blue when they are pressed.
+你可以在某个容器上一次性重写多项资源，从而影响该容器及其子元素。例如，可以让所有按钮在悬停时变绿、按下时变蓝：
 
 ```xml
 <ikw:SimpleStackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -121,9 +119,9 @@ In this way, you can override multiple resources for multiple elements. When the
 
 ![](hover-green-pressed-blue.gif)
 
-### Override resources globally
+### 全局重写资源
 
-You can also override the resources globally. To do this, you can add the resources to the `Application.Resources` property. This will make the resources available to all the elements in the application.
+也可以在应用级别重写资源，只需将资源添加到 `Application.Resources`，使其对整个应用生效：
 
 ```xml title="App.xaml"
 <Application x:Class="MyWpfTest.App"
@@ -147,26 +145,26 @@ You can also override the resources globally. To do this, you can add the resour
 </Application>
 ```
 
-The code above does the same thing as the previous example, but it makes the resources available to all the elements in the application.
+上述代码与前述示例功能相同，但作用域为整个应用。
 
-### Forwarding resource override
+### 转发资源重写
 
-In some cases, you may want to make one resource the same as another resource. The obvious way is to copy the value of the resource to the other resource. But this is not a good idea because it will make the code hard to maintain. Instead, we've prepared a surprise for you -- the `ui:StaticResource` markup extension.
+有时你希望将一个资源指向另一个资源，而不是复制值。为此可以使用 `ui:StaticResource` 标记扩展：
 
 ```xml
 <ui:StaticResource x:Key="{x:Static ui:ThemeKeys.ButtonBackgroundPointerOverKey}" ResourceKey="{x:Static ui:ThemeKeys.SubtleFillColorSecondaryBrushKey}" />
 <ui:StaticResource x:Key="{x:Static ui:ThemeKeys.ButtonBackgroundPressedKey}" ResourceKey="{x:Static ui:ThemeKeys.SubtleFillColorTertiaryBrushKey}" />
 ```
 
-The code above makes the `ButtonBackgroundPointerOver` resource the same as the `SubtleFillColorSecondaryBrush` resource, and the `ButtonBackgroundPressed` resource the same as the `SubtleFillColorTertiaryBrush` resource. This way you can make the resources the same without copying the values, improving the readability and maintainability of the code as well.
+上述代码将 `ButtonBackgroundPointerOver` 指向 `SubtleFillColorSecondaryBrush`，将 `ButtonBackgroundPressed` 指向 `SubtleFillColorTertiaryBrush`，无需复制具体值，有利于可维护性。
 
-You can use `ui:StaticResource` in anywhere you want to forward the resource override, like what we've talked about in the previous sections.
+你可以在任何需要转发资源的地方使用 `ui:StaticResource`，正如上文所示。
 
-## Examples
+## 示例
 
-### Remove background and border of a TextBox
+### 移除 TextBox 的背景与边框
 
-By default, the TextBox control comes with a border and background. However, in some cases, you may want to remove them. You can do this by overriding the `TextBoxBackground` and `TextBoxBorderBrush` resources like this:
+默认情况下，`TextBox` 带有边框与背景，但在某些场景下你可能想移除它们。可以通过重写相应资源来实现：
 
 ```xml
 <TextBox Text="I'm trapped in a border!"/>
@@ -188,30 +186,28 @@ By default, the TextBox control comes with a border and background. However, in 
 
 ![TextBox with and without border and background](textbox-with-and-without-borders.png)
 
-Alternatively, you can also control the border with the **BorderThickness** property like this:
+另外，也可以通过设置 **BorderThickness** 控制边框：
 
 ```xml
 <Thickness x:Key="{x:Static ui:ThemeKeys.TextControlBorderThemeThicknessKey}">0</Thickness>
 <Thickness x:Key="{x:Static ui:ThemeKeys.TextControlBorderThemeThicknessFocusedKey}">0</Thickness>
 ```
 
-The two above does almost the same thing, but they are different in nature. The first one removes the border by setting the color to transparent, while the second one removes the border by setting the thickness to 0. You may pick the one that fits your needs.
+两种方法效果相近，但原理不同：第一种通过设置颜色为透明来“隐藏”边框，第二种通过将厚度设为 0 来移除边框。
 
 :::tip
 
-This is also applicable to RichTextBox, PasswordBox, and other controls that inherit from TextBox.
+同样适用于 `RichTextBox`、`PasswordBox` 及其它继承自 `TextBox` 的控件。
 
 :::
 
-### Remove all the tint colors of NavigationView
+### 移除 NavigationView 的色调
 
-NavigationView control comes with a tint color by default. You can remove it by overriding resources. 
+`NavigationView` 默认带有一层色调，你可以通过重写资源移除它。详细内容见 [NavigationView](%BASE_NAME%/components/navigation/navigation-view#clear-background) 页面。
 
-The details are talked about in the [NavigationView](%BASE_NAME%/components/navigation/navigation-view#clear-background) page.
+### 将按钮设置为任意颜色
 
-### Make a button into any color you want
-
-In some scenarios, you may want a Button neither default nor accent color. Like when you're dealing with "Delete file" dialog, the confirm button is usually red, this can be done by overriding the color resource of a Button:
+在某些场景 (例如“删除文件”确认对话框) ，你可能希望将按钮设置为非默认或非强调色，例如红色。可以通过重写按钮的颜色资源实现：
 
 ```xml
 <Button Content="Confirm Deletion">
@@ -235,9 +231,9 @@ In some scenarios, you may want a Button neither default nor accent color. Like 
 
 ![Red button](red-button.png)
 
-## See also
+## 另请参阅
 
-### Related articles
+### 相关文章
 
 - [Theming / Theme Resources](%BASE_NAME%/features/theming/theme-resources)
 
