@@ -1,0 +1,137 @@
+---
+description: "一种响应用户输入并引发 Click 事件的控件。"
+---
+
+# Button
+
+按钮允许用户通过一次点击来执行操作并做出选择。它会响应来自鼠标、键盘、触控笔或其他输入设备的输入，并引发 Click 事件。
+
+- **类**: [System.Windows.Controls](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls)[.Button](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.button)
+
+Button 的主要用途是在用户单击它时触发某些操作。实现这一点有两种方式：
+
+- 处理 Click 事件。
+- 将 Command 属性绑定到描述命令逻辑的 ICommand 实现。
+
+
+## 示例
+
+以下示例展示了 Button 控件的常见用法。
+
+### 一个基础按钮
+
+通过使用 Button 类，你可以创建一个按钮。可以使用 Content 属性添加内容，并使用 Click 事件处理其被单击时的逻辑。
+
+```xml
+<Button Content="Click me" Click="Button_Click"/>
+```
+
+```csharp
+private void Button_Click(object sender, RoutedEventArgs e)
+{
+    // 在按钮被单击时执行操作！
+}
+```
+
+然后你就可以看到一个带文本的普通按钮，并尝试单击它！
+
+![一个基础按钮](a-basic-button.png)
+
+### 带图标的按钮
+
+按钮通常只包含简单的字符串内容，但你可以使用任何对象作为内容。使用以下代码，你会得到一个仅包含图标和工具提示的按钮：
+
+```xml
+<Button ToolTip="Save my documents">
+    <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.Save}"/>
+</Button>
+```
+
+![仅带图标的按钮](button-with-icon-only.png)
+
+有关 *ui:FontIcon* 的更多信息，请[点击这里](%BASE_NAME%/components/media/font-icon)
+
+### 带图标和文本的按钮
+
+如果你想同时显示图标和文本，最好的方式是使用 ui:IconAndText 组件。它将图标和文本组合在一起：
+
+```xml
+<Button>
+    <ui:IconAndText Icon="{x:Static ui:SegoeFluentIcons.Save}" Content="Save"/>
+</Button>
+```
+
+![带图标和文本的按钮](a-button-with-icon-and-text.png)
+
+有关 IconAndText 的更多信息，请[点击这里](%BASE_NAME%/components/media/icon-and-text)
+
+如果你不想使用 FontIcon，或者你想完全自定义子组件（不推荐这样做，因为这可能会增加复杂性并使维护更困难），可以尝试以下代码：
+
+```xml
+<Button>
+    <ui:SimpleStackPanel Orientation="Horizontal" Spacing="5">
+        <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.Save}"/>
+        <TextBlock Text="Save"/>
+    </ui:SimpleStackPanel>
+</Button>
+```
+
+### 强调按钮
+
+强调按钮属于高强调级别，通过使用层级和填充进行区分。它们包含对你的应用程序最重要的操作。
+
+要将按钮应用为强调样式，需要将 Style 属性设置为 `{StaticResource {x:Static ui:ThemeKeys.AccentButtonStyleKey}}`。
+
+```xml
+<Button Style="{StaticResource {x:Static ui:ThemeKeys.AccentButtonStyleKey}}"/>
+```
+
+由于强调按钮通常是整个窗口的主要操作，因此最好允许用户按下 Enter 键来触发其点击事件，这可以通过将 IsDefault 属性设置为 `True` 来实现。
+
+完整代码如下所示：
+
+```xml
+<Button Content="Accent button" Style="{StaticResource {x:Static ui:ThemeKeys.AccentButtonStyleKey}}" IsDefault="True"/>
+```
+
+![](accent-button.png)
+
+## 备注
+
+### 层级
+
+按钮控件默认带有层级边框效果。你可以使用 `ui:ElevationBorder` 来自定义其层级效果。
+
+更多信息请参见 [Theming / Elevations](%BASE_NAME%/features/theming/elevations)。
+
+### 样式
+
+Button 控件有两个内置样式：
+
+- DefaultButtonStyle：按钮的默认样式，可通过 `ui:ThemeKeys.DefaultButtonStyleKey` 访问。
+
+- AccentButtonStyle：按钮的强调样式，可通过 `ui:ThemeKeys.AccentButtonStyleKey` 访问。
+
+## 另请参阅
+
+### Microsoft Learn
+
+- [Button Class (WPF)](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.button)
+
+- [Button Class (WinRT)](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.button)
+
+- [Button - WPF](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/button)
+
+- [Buttons - Windows apps](https://learn.microsoft.com/en-us/windows/apps/design/controls/buttons)
+
+### 相关文章
+
+- [Components / DropDownButton](%BASE_NAME%/components/basic-input/dropdown-button)
+
+- [Components / ToggleButton](%BASE_NAME%/components/basic-input/toggle-button)
+
+- [Components / SplitButton](%BASE_NAME%/components/basic-input/split-button)
+
+- [Components / HyperlinkButton](%BASE_NAME%/components/basic-input/hyperlink-button)
+
+- [Components / RepeatButton](%BASE_NAME%/components/basic-input/repeat-button)

@@ -1,0 +1,123 @@
+---
+description: "一个点击时显示选项浮出菜单的按钮。"
+---
+
+# DropDownButton
+
+DropDownButton 是一个按钮，显示一个 Chevron 图标作为视觉指示器，表示它有一个附加的浮出菜单，其中包含更多选项。它具有与标准 Button 控件加浮出菜单相同的行为；只是外观不同。
+
+- **类**: [iNKORE.UI.WPF.Modern.Controls.DropDownButton](%BASE_NAME%/definitions/controls/dropdown-button)
+
+下拉按钮继承了 Click 事件，但您通常不会使用它。相反，您应使用 Flyout 属性来附加浮出菜单，并通过浮出菜单中的菜单选项来调用操作。当按下按钮时，浮出菜单会自动打开。请确保指定浮出菜单的 Placement 属性，以确保相对于按钮的所需位置。默认的放置算法可能不会在所有情况下产生预期的放置。有关浮出菜单的更多信息，请参阅**浮出菜单**和**菜单浮出菜单**。
+
+## 示例
+
+### 基本 DropDownButton
+
+此代码创建一个 DropDownButton，其浮出菜单在按下按钮时打开：
+
+```xml
+<ui:DropDownButton Content="Click me!">
+    <ui:DropDownButton.Flyout>
+        <ui:Flyout Placement="Bottom">
+            <TextBlock Text="Hi there!" Width="200" Height="120"/>
+        </ui:Flyout>
+    </ui:DropDownButton.Flyout>
+</ui:DropDownButton>
+```
+
+![](basic-dropdown-button.png)
+
+### 使用 MenuFlyout
+
+此示例演示如何创建具有 MenuFlyout 的下拉按钮，该 MenuFlyout 包含用于 TextBox 中段落对齐的命令。
+
+```xml
+<ui:DropDownButton x:Name="DropDownButton_Align">
+
+    <ui:FontIcon x:Name="FontIcon_Align" Icon="{x:Static ui:SegoeFluentIcons.AlignLeft}"/>
+
+    <ui:DropDownButton.Flyout>
+        <ui:MenuFlyout>
+            
+            <MenuItem Header="Align Left" Tag="left" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.AlignLeft}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Align Center" Tag="center" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.AlignCenter}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Align Right" Tag="right" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.AlignRight}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            
+        </ui:MenuFlyout>
+    </ui:DropDownButton.Flyout>
+</ui:DropDownButton>
+
+<TextBox x:Name="TextBox_Text" Text="Text!" Width="200" Padding="10,6,6,6"/>
+```
+```csharp
+private void Button_SaveScreenshot_Click(object sender, RoutedEventArgs e)
+{
+    RenderTargetBitmap targetBitmap = new RenderTargetBitmap(
+        (int)Viewbox_Viewport.ActualWidth,
+        (int)Viewbox_Viewport.ActualHeight,
+        96d,
+        96d,
+        PixelFormats.Default);
+
+    targetBitmap.Render(Viewbox_Viewport);
+
+
+    if (saveFileDialog.ShowDialog() == true)
+    {
+        BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+        encoder.Frames.Add(BitmapFrame.Create(targetBitmap));
+        // 将文件保存到磁盘
+        using (FileStream fs = File.Open(saveFileDialog.FileName, FileMode.OpenOrCreate))
+        {
+            encoder.Save(fs);
+        }
+    }
+}
+```
+
+## 备注
+
+### 立体边框 (Elevation)
+
+即将推出
+
+### Flyout Service
+
+即将推出
+
+### 样式
+
+DropDownButton 控件有一个内置样式。由于这是来自 `iNKORE.UI.WPF.Modern.Controls.dll` 的直接控件，默认样式键为 `null`，您可以使用 `{x:Null}` 来应用默认样式。
+
+## 另请参阅
+
+### 相关文章
+
+- [Definitions / DropDownButton Class](%BASE_NAME%/definitions/controls/dropdown-button)
+
+- [Components / AppBarButton](../menu-and-toolbars/appbar-button)
+
+- [Components / Flyout](../dialogs/flyout)
+
+- [Components / MenuFlyout](../menu-and-toolbars/menu-flyout)
+
+- Components / [SplitButton](./split-button)
+
+### Microsoft Learn
+
+- [DropDownButton class (WinRT)](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.dropdownbutton)
+
+- [Buttons # Drop down button - Windows apps](https://learn.microsoft.com/en-us/windows/apps/design/controls/buttons#example---drop-down-button)

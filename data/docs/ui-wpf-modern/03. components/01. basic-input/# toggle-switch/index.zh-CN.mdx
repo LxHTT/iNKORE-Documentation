@@ -1,0 +1,119 @@
+---
+description: "一个可以在 2 种状态之间切换的开关。"
+---
+
+# ToggleSwitch
+
+使用 ToggleSwitch 控件向用户呈现恰好两个相互排斥的选项（如开/关），选择一个选项会立即提交。切换开关应该有一个标签。
+
+- **类**: [iNKORE.UI.WPF.Modern.Controls](..)[.ToggleSwitch](.)
+
+## 示例
+
+以下是如何创建一个简单的 ToggleSwitch。此 XAML 创建一个 ToggleSwitch。
+
+```xml
+<ui:ToggleSwitch/>
+<ui:ToggleSwitch IsOn="True"/>
+```
+
+![](on-and-off.png)
+
+然后，您可以添加一个标头来告诉用户此 ToggleSwitch 的作用，它将在控件上方的区域中显示。
+
+ToggleSwitch 可以处于打开或关闭状态。使用 IsOn 属性来确定 ToggleSwitch 的状态。当 ToggleSwitch 用于控制另一个二进制属性的状态时，您可以使用如下所示的绑定。
+
+在其他情况下，您可以处理 Toggled 事件来响应状态的更改。
+
+```xml
+<ui:SimpleStackPanel Spacing="10">
+    <ui:ToggleSwitch x:Name="ToggleSwitch_MainLight" Header="Main Light" Toggled="ToggleSwitch_MainLight_Toggled"/>
+    <TextBlock x:Name="TextBlock_MainLightStatus" Text="Try clicking the ToggleSwitch" Opacity="0.5"/>
+</ui:SimpleStackPanel>
+```
+
+```csharp
+private void ToggleSwitch_MainLight_Toggled(object sender, RoutedEventArgs e)
+{
+    TextBlock_MainLightStatus.Text = ToggleSwitch_MainLight.IsOn
+        ? "The main light is turned on"
+        : "The main light is turned off";
+}
+```
+
+![](main-light-on.png)
+
+## 备注
+
+### 这是正确的控件吗？
+
+对于用户点击切换后立即生效的二元操作，请使用 ToggleSwitch。
+
+![](on-and-off.png)
+
+
+### 样式
+
+Button 控件有一个内置样式：
+
+- **DefaultCheckBoxStyle**: CheckBox 的默认样式，您可以使用 `ui:ThemeKeys.DefaultCheckBoxStyleKey` 访问它。
+
+将 ToggleSwitch 想象为设备的物理电源开关：当您想启用或禁用设备执行的操作时，您将其打开或关闭。
+
+为了使 ToggleSwitch 易于理解，用一或两个词（最好是名词）标记它，以描述它控制的功能。例如，"WiFi" 或 "厨房灯"。
+
+### 在 ToggleSwitch 和 CheckBox 之间选择
+
+对于某些操作，ToggleSwitch 或 CheckBox 可能都适用。为了决定哪个控件更好，请遵循以下提示：
+
+- 对于二元设置，当用户更改后立即生效时，使用切换开关。
+
+   ![](switch-vs-checkbox.png)
+
+   在此示例中，使用 ToggleSwitch 可以清楚地看到厨房灯已设置为 "打开"。但对于 CheckBox，用户需要思考灯现在是否亮着，或者他们是否需要勾选框来打开灯。
+
+- 对于可选（"锦上添花"）项目，使用 CheckBox。
+
+- 当用户必须执行额外步骤才能使更改生效时，使用 CheckBox。例如，如果用户必须单击 "提交" 或 "下一步" 按钮来应用更改，请使用 CheckBox。
+
+- 当用户可以选择与单个设置或功能相关的多个项目时，使用 CheckBox。
+
+:::tip 建议
+
+- 尽可能使用默认的 On 和 Off 标签；仅在必要时才替换它们以使 ToggleSwitch 有意义。如果替换它们，使用单个单词更准确地描述切换。通常，如果 "On" 和 "Off" 这两个词不能描述与 ToggleSwitch 相关的操作，您可能需要使用不同的控件。
+
+- 避免替换 On 和 Off 标签，除非您必须这样做；除非情况要求自定义标签，否则坚持使用默认标签。
+
+:::
+
+### 紧凑尺寸
+
+如果您在紧凑布局中使用 ToggleSwitch，您可能会发现即使复选框没有内容，它也会占用一些空间。这是因为在默认样式中设置了 **MinWidth** 属性。
+
+![](still-taking-space.png)
+
+要解决此问题，您可以简单地将 **MinWidth** 属性设置为 `0`，如下所示：
+
+```xml
+<ToggleSwitch MinWidth="0"/>
+```
+
+![](when-minwidth-is-zero.png)
+
+## 另请参阅
+
+### 相关文章
+
+- [Definitions / ToggleSwitch Class](%BASE_NAME%/definitions/controls/toggle-switch)
+
+- [Components / CheckBox](./check-box)
+
+- [Components / ToggleButton](./toggle-button)
+
+- [Components / RadioButton](./radio-button)
+
+### Microsoft Learn
+
+- [Guidelines for toggle switch](https://learn.microsoft.com/en-us/windows/apps/design/controls/toggles)
+
+- [ToggleSwitch Class (WinRT)](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.toggleswitch)

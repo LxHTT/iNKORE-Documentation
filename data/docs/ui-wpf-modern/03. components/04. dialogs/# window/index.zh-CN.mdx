@@ -1,0 +1,198 @@
+---
+description: "提供了创建、配置、显示不管理窗口和对话框的生命周期的能力。"
+---
+
+# Window
+
+Window 类代表 Windows 应用程序中的一个窗口。它提供了一套丰富的功能来管理和与窗口互动，例如处理其内容、外观和行为。本文档涵盖了 Window 类的基本方面，执其属性、方法和事件。
+
+- **类**: [System.Windows](https://learn.microsoft.com/en-us/dotnet/api/system.windows)[.Window](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.button)
+
+- **继承**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) → [Window](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.window)
+
+## 示例
+
+### 创建一个基本窗口
+
+您可以使用 Window 类创建一个基本窗口。默认情况下，当您使用 Visual Studio 创建 WPF 项目时，有一个主窗口称为 `MainWindow.xaml`。多数情况下我们将此窗口用作应用程序的主窗口。您也可以按以下步骤向项目添加更多窗口。
+
+首先，在解决方案资源管理器中右键单击项目，选择 **添加** > **新项目**，然后从列表中选择“Window (WPF)”。将新窗口命名为 `MyWindow.xaml`。
+
+![Add a new window file](add-a-new-window-file.png)
+
+然后，您可以通过创建它的实例并调用 `Show` 方法来打开新窗口。以下是如何打开新窗口的示例：
+
+```csharp
+var myWindow = new MyWindow();
+myWindow.Show();
+```
+
+### 应用现代样式
+
+窗口总是使用默认样式和原生框架，除非您手动应用现代样式。通过 **ui:WindowHelper.UseModernWindowStyle** 属性，您可以轻松地为窗口应用现代样式，如下所示：
+
+```xml title="MainWindow.xaml"
+<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+# highlight-next-line
+        ui:WindowHelper.UseModernWindowStyle="True"
+        ui:WindowHelper.CornerStyle="Round"
+        Title="I was just walking by..." Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <ui:SimpleStackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+        <TextBlock Text="I know, karma's a b!tch." HorizontalAlignment="Center" FontSize="24" FontWeight="Bold"/>
+        <TextBlock Text="Lorem ipsum dolor sit amet" FontSize="16" HorizontalAlignment="Center"/>
+    </ui:SimpleStackPanel>
+</Window>
+```
+
+![A basic modern window](a-basic-modern-window.png)
+
+### 窗口材质
+
+自 Windows 10 以来，有一些系统级窗口材质可以应用于窗口。您可以使用 **ui:WindowHelper.SystemBackdrop** 属性来应用材质。例如，您可以使用以下代码应用 Mica 效果：
+
+```ini
+ui:WindowHelper.SystemBackdropType="Mica"
+```
+
+![Window with mica effect](with-mica-effect.jpg)
+
+### 标题栏中的返回按钮
+
+您可以使用 **ui:TitleBar.IsBackButtonVisible** 和 **ui:TitleBar.IsBackEnabled** 属性来显示和启用标题栏中的返回按钮。返回按钮很有用，当您想导航回到上一个窗口或页面时。
+
+首先，确保在窗口中启用了返回按钮功能：
+
+```ini
+ui:TitleBar.IsBackButtonVisible="True"
+ui:TitleBar.IsBackEnabled="True"
+```
+
+然后当您运行时，您可能会看到标题栏中有一个返回按钮。接下来，您可以使用 **ui:TitleBar.BackButtonCommand** 处理返回按钮的点击事件。有关命令的更多信息，请 [点击此处](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/commanding-overview)。
+
+完整的代码应该像这样：
+
+```xml title="MainWindow.xaml"
+<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        ui:WindowHelper.UseModernWindowStyle="True"
+# highlight-start
+        ui:TitleBar.IsBackButtonVisible="True"
+        ui:TitleBar.IsBackEnabled="True"
+        ui:TitleBar.BackButtonCommand="{x:Static local:MainWindow.BackCommand}"
+# highlight-end
+        Title="I was just walking by..." Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <ui:SimpleStackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+        <TextBlock Text="I know, karma's a b!tch." HorizontalAlignment="Center" FontSize="24" FontWeight="Bold"/>
+        <TextBlock Text="Lorem ipsum dolor sit amet" FontSize="16" HorizontalAlignment="Center"/>
+    </ui:SimpleStackPanel>
+</Window>
+```
+
+```csharp title="MainWindow.xaml.cs"
+public partial class MainWindow : Window
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+# highlight-next-line
+        this.CommandBindings.Add(new CommandBinding(BackCommand, BackCommand_Executed));
+    }
+
+# highlight-next-line
+    public static readonly RoutedUICommand BackCommand = new RoutedUICommand("Back button clicked", "Back", typeof(MainWindow));
+
+    private void BackCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        // 当点击返回按钮时做点什么
+        MessageBox.Show("Back button is clicked!");
+    }
+}
+```
+
+
+当点击返回按钮时，您可能会看到预期的 MessageBox 弹出来。您可以使用您自己的逻辑来替换 MessageBox，以导航回到上一个窗口或页面。
+
+![Window with back button](window-with-back-button.png)
+
+您也可以在 **ui:TitleBar** 类中使用其他包含 "Back" 或 "BackButton" 通配符的属性来对返回按钮进行更多自定义。
+
+## 备注
+
+### 管理属性
+
+为了提供最佳的外观和感受，我们需要接管窗口的 WindowChrome 以一上根据您的需要进行更改。因此，应用现代样式后，您不应此接修改窗口的 WindowChrome，基于相同的原因，您也不应修改以下属性：
+
+- WindowChrome.WindowChrome
+
+- FrameworkElement.Style
+
+:::danger 永远不要直接修改它们
+
+如果您修改了上述属性，现代样式和窗口材质可能会損坏，窗口可能永远不会是预期的样子或甚至会崩溃。
+
+:::
+
+### 修复窗口的最大化行为
+
+由于我们完全自定义了窗口以应用现代样式，窗口的默认最大化行为可能不会按预期工作。但请不需要担心，我们有一种方法来解决此问题，使窗口按预期最大化。但是，此修复可能会产生下列异常：
+
+> **托管调试助手**: 对 PInvoke 函数 'iNKORE.UI.WPF.Modern!iNKORE.UI.WPF.Modern.Controls.Primitives.MaximizedWindowFixer::GetWindowPlacement' 的调用导致堆栈不对称. 原因可能是托管的 PInvoke 签名与非托管的目标签名不匹配。请检查 PInvoke 签名的调用约定和参数与非托管的目标签名是否匹配。
+
+此个异常是 **无害的，可以忽略**。如果您想消除此例外，您可以将此属性设置为 **False**（不推荐，因为它会破坏最大化功能）。
+
+```ini
+ui:WindowHelper.FixMaximizedWindow="False"
+```
+
+为了获得更好的解决方案，您可以在 Visual Studio 中的 **异常设置** 窗口中关闭 PInvoke 异常的中断：
+
+![Don't break when PInvoke exception is thrown](dont-break-when-pinvoke-exception.png)
+
+或者当此个异常出现时，您可以简单地取消勾选 **Break when this exception type is thrown** 或勾选 **(Except when throw from) iNKORE.UI.WPF.Modern.dll**，这也会忽略此个异常。
+
+![Except when throw from](except-when-throw-from.png)
+
+### 自定义
+
+使用以下类来自定义窗口控件及其标题栏：
+
+- [WindowHelper](%BASE_NAME%/definitions/controls/helpers/window-helper)
+
+- [TitleBar](%BASE_NAME%/definitions/controls/primitives/titlebar)
+
+## 另请参阅
+
+### Microsoft Learn
+
+- [Window Class (WPF)](https://learn.microsoft.com/en-us/dotnet/api/system.windows.window)
+
+### 相关控件
+
+- [Flyout](./flyout)
+
+- [ContentDialog](./content-dialog)
+
+- [MessageBox](./message-box)
+
+### 相关文章
+
+- [Definitions / WindowHelper](%BASE_NAME%/definitions/controls/helpers/window-helper)
+
+- [Definitions / TitleBar](%BASE_NAME%/definitions/controls/primitives/titlebar)
+
+- [Definitions / WindowCornerStyle](%BASE_NAME%/definitions/helpers/styles/window-corner-style)
+
+- [Definitions / BackdropType](%BASE_NAME%/definitions/helpers/styles/backdrop-type)

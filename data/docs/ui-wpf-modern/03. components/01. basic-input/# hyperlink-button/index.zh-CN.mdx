@@ -1,0 +1,97 @@
+---
+description: "一个看起来像超链接文本的按钮，可以导航到 URI 或处理 Click 事件。"
+---
+
+# HyperlinkButton
+
+HyperlinkButton 显示为文本超链接。当用户点击它时，它会在默认浏览器中打开您在 NavigateUri 属性中指定的页面。或者您可以处理其 Click 事件，通常用于在应用程序内导航。
+
+- **类**: [iNKORE.UI.WPF.Modern.Controls.HyperlinkButton](%BASE_NAME%/definitions/controls/hyperlink-button)
+
+## 示例
+
+**HyperlinkButton** 看起来像超链接文本，但工作方式像按钮。您可以通过两种方式使用它：
+
+### 使用 Click 事件
+
+处理 **Click** 事件 **(推荐)**。这与标准 **Button** 的 **Click** 事件完全相同，可用于在应用程序内导航。
+
+```xml
+<ui:HyperlinkButton Content="iNKORE's offical site" RaiseHyperlinkClicks="False" Click="HyperlinkButton_Click"/>
+```
+
+```csharp
+private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+{
+    Process.Start(new ProcessStartInfo("https://inkore.net/")
+    {
+        UseShellExecute = true
+    });
+}
+```
+
+![](a-hyperlink-button.png)
+
+:::warning
+
+注意 **RaiseHyperlinkClicks** 属性！它将在以下部分中介绍。
+
+:::
+
+### 使用 NavigateUri 属性
+
+设置 **NavigateUri** 属性。当用户点击它时，它会自动在默认浏览器中打开 URI。
+
+```xml
+<ui:HyperlinkButton Content="iNKORE's offical site" NavigateUri="https://inkore.net/"/>
+```
+
+## 备注
+
+### 这是正确的控件吗？
+
+当您需要按下时做出响应并将用户导航到有关所按下文本的更多信息时，使用超链接。
+
+根据您的需要选择合适的超链接类型：
+
+- 使用文本控件内的内联 [Hyperlink](https://learn.microsoft.com/en-us/dotnet/api/system.windows.documents.hyperlink) 文本元素。Hyperlink 元素与其他文本元素一起流动，您可以在任何 InlineCollection 中使用它。如果您需要自动文本换行且不一定需要大的点击目标，请使用文本超链接。超链接文本可能很小且难以定位，特别是对于触摸。
+
+- 对于独立超链接，使用 HyperlinkButton。HyperlinkButton 是一个专业化的 Button 控件，您可以在任何使用 Button 的地方使用它。
+
+- 使用带有 Image 作为内容的 HyperlinkButton 以创建可点击的图像。
+
+### RaiseHyperlinkClicks 属性
+
+由于 WPF 的内部设计，点击按钮一次时 Click 事件会被触发两次。为了避免这种情况，如果您使用 **Click** 事件而不是 **NavigateUri** 属性，需要将 **RaiseHyperlinkClicks** 属性设置为 `false`。
+
+当 **RaiseHyperlinkClicks** 设置为 `false` 时，NavigateUri 将被忽略并不会触发。
+
+:::tip 建议
+
+- 仅将超链接用于导航；不要将其用于其他操作。
+- 对于基于文本的超链接，使用类型坡道中的 Body 样式。阅读有关字体和 Windows 类型坡道的信息。
+- 保持离散超链接之间的距离足够远，以便用户可以区分它们并轻松选择每一个。
+为超链接添加工具提示，指示用户将被导向的位置。如果用户将被导向外部网站，请在工具提示中包含顶级域名，并使用辅助字体颜色设置文本样式。
+
+:::
+
+### 样式
+
+HyperlinkButton 控件有一个内置样式。由于这是来自 `iNKORE.UI.WPF.Modern.Controls.dll` 的直接控件，默认样式键是 `null`，您可以使用 `{x:Null}` 来应用默认样式。
+
+## 另请参阅
+
+### 相关文章
+
+- [Definitions / HyperlinkButton Class](%BASE_NAME%/definitions/controls/hyperlink-button)
+
+- [Components / Button](./button)
+
+### Microsoft Learn
+
+- [HyperlinkButton class (WinRT)](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.hyperlinkbutton)
+
+- [Hyperlink class (WPF)](https://learn.microsoft.com/en-us/dotnet/api/system.windows.documents.hyperlink)
+
+- [Hyperlinks - Windows apps](https://learn.microsoft.com/en-us/windows/apps/design/controls/hyperlinks#create-a-hyperlinkbutton)
+

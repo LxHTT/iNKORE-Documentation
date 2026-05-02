@@ -1,0 +1,116 @@
+---
+description: "一个用户可以从中选择项目的下拉列表。"
+---
+
+# ComboBox
+
+使用组合框（也称为下拉列表）呈现用户可以选择的项目列表。组合框以紧凑状态开始，然后展开以显示可选项目的列表。列表框类似于组合框，但不可折叠/没有紧凑状态。您可以在本文末尾了解有关列表框的更多信息。
+
+- **类**: [System.Windows.Controls](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls)[.ComboBox](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.combobox); 
+
+## 示例
+
+以下示例创建了一个 ComboBox。该示例通过将 ItemsSource 属性绑定到 VacationSpots 类型的集合对象来填充 ComboBox。该示例还创建了一个 TextBlock，用于显示 ComboBox 的选定项。
+
+```xml
+<StackPanel  Grid.Column="0"
+        Grid.Row="6">
+    <StackPanel.Resources>
+        <local:VacationSpots x:Key="myVacations"/>
+    </StackPanel.Resources>
+    <ComboBox Name="comboBox1"
+        ItemsSource="{StaticResource myVacations}"
+        Text="My Cities"
+        Width="200"
+        IsEditable="true"
+        IsReadOnly="true"/>
+
+    <TextBlock Text="{Binding ElementName=comboBox1, Path=SelectedItem}" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+</StackPanel>
+```
+
+以下示例定义了前面示例中 ComboBox 绑定到的集合对象。
+
+```csharp
+class VacationSpots : ObservableCollection<string>
+{
+    public VacationSpots ()
+    {
+        Add("Spain");
+        Add("France");
+        Add("Peru");
+        Add("Mexico");
+        Add("Italy");
+    }
+}
+```
+
+然后您可以从 ComboBox 中选择一个城市。
+
+![](combobox-vacation-spot.png)
+
+## 备注
+
+### 这是正确的控件吗？
+
+使用下拉列表允许用户从可以用单行文本充分表示的一组项目中选择单个值。
+
+使用列表或网格视图而不是组合框来显示包含多行文本或图像的项目。
+
+当项目少于五个时，考虑使用单选按钮（如果只能选择一项）或复选框（如果可以选择多项）。
+
+当选择项目在您的应用程序流中的重要性不高时，使用组合框。如果在大多数情况下建议使用默认选项，那么使用列表视图显示所有项目可能会比必要的给予选项更多关注。您可以使用组合框节省空间并最大程度地减少干扰。
+
+:::tip 建议
+
+将组合框项目的文本内容限制为单行。
+以最合理的顺序对组合框中的项目进行排序。将相关选项组合在一起，并将最常见的选项放在顶部。按字母顺序对名称排序，按数值顺序对数字排序，按时间顺序对日期排序。
+
+:::
+
+## ItemsControl
+
+ComboBox 允许用户从下拉列表中选择一个项目，或者可以选择在控件的文本框中输入新文本。ComboBox 是一个 ItemsControl，这意味着它可以包含任何类型的对象集合（例如字符串、图像或面板）。有关更多信息，请参阅 [ItemsControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.itemscontrol) 类。
+
+### 扩展属性
+
+您可以使用来自 `ui:ComboBox` 的附加属性来自定义您的 ComboBox。
+
+- **TextBoxStyle**: 获取 ComboBox 可编辑时 ComboBox 中 TextBox 的样式。
+
+### 立体边框 (Elevation) 
+
+ComboBox 控件默认带有立体边框 (Elevation) 效果。您可以使用 `ui:ElevationBorder` 来自定义其立体效果。
+
+查看更多: ____
+
+### 样式
+
+为 Button 控件内置了一种样式：
+
+- **DefaultComboBoxStyle**: ComboBox 的默认样式，您可以使用 `ui:ThemeKeys.DefaultComboBoxStyleKey` 访问它。
+
+## 另请参阅
+
+### 相关文章
+
+- [Components / DropDownButton](./dropdown-button)
+
+- [Components / ToggleButton](./toggle-button)
+
+- [Components / SplitButton](./split-button)
+
+- [Components / HyperlinkButton](./hyperlink-button)
+
+- [Components / RepeatButton](./repeat-button)
+
+### Microsoft Learn
+
+- [ComboBox Class (WPF)](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.combobox)
+
+- [ComboBox Class (WinRT)](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.combobox)
+
+- [ComboBox - WPF](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/combobox)
+
+- [Combo box and list box - Windows apps](https://learn.microsoft.com/en-us/windows/apps/design/controls/combo-box)
+
