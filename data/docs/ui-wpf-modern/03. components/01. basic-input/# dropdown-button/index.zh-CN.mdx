@@ -63,26 +63,21 @@ DropDownButton 是一个按钮，显示一个 Chevron 图标作为视觉指示�
 <TextBox x:Name="TextBox_Text" Text="Text!" Width="200" Padding="10,6,6,6"/>
 ```
 ```csharp
-private void Button_SaveScreenshot_Click(object sender, RoutedEventArgs e)
+private void MenuItem_Click(object sender, RoutedEventArgs e)
 {
-    RenderTargetBitmap targetBitmap = new RenderTargetBitmap(
-        (int)Viewbox_Viewport.ActualWidth,
-        (int)Viewbox_Viewport.ActualHeight,
-        96d,
-        96d,
-        PixelFormats.Default);
-
-    targetBitmap.Render(Viewbox_Viewport);
-
-
-    if (saveFileDialog.ShowDialog() == true)
+    if (sender is MenuItem menuItem && menuItem.Tag is string alignment)
     {
-        BmpBitmapEncoder encoder = new BmpBitmapEncoder();
-        encoder.Frames.Add(BitmapFrame.Create(targetBitmap));
-        // 将文件保存到磁盘
-        using (FileStream fs = File.Open(saveFileDialog.FileName, FileMode.OpenOrCreate))
+        switch (alignment)
         {
-            encoder.Save(fs);
+            case "left":
+                TextBox_Text.TextAlignment = TextAlignment.Left;
+                break;
+            case "center":
+                TextBox_Text.TextAlignment = TextAlignment.Center;
+                break;
+            case "right":
+                TextBox_Text.TextAlignment = TextAlignment.Right;
+                break;
         }
     }
 }
