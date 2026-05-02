@@ -4,7 +4,7 @@ description: "一个可以在 2 种状态之间切换的开关。"
 
 # ToggleSwitch
 
-使用 ToggleSwitch 控件向用户呈现恰好两个相互排斥的选项（如开/关），选择一个选项会立即提交。切换开关应该有一个标签。
+使用 ToggleSwitch 控件向用户呈现恰好两个相互排斥的选项 (如开/关) ，选择一个选项会立即提交。ToggleSwitch 应该有一个标签。
 
 - **类**: [iNKORE.UI.WPF.Modern.Controls](..)[.ToggleSwitch](.)
 
@@ -54,25 +54,21 @@ private void ToggleSwitch_MainLight_Toggled(object sender, RoutedEventArgs e)
 
 ### 样式
 
-Button 控件有一个内置样式：
-
-- **DefaultCheckBoxStyle**: CheckBox 的默认样式，您可以使用 `ui:ThemeKeys.DefaultCheckBoxStyleKey` 访问它。
-
 将 ToggleSwitch 想象为设备的物理电源开关：当您想启用或禁用设备执行的操作时，您将其打开或关闭。
 
-为了使 ToggleSwitch 易于理解，用一或两个词（最好是名词）标记它，以描述它控制的功能。例如，"WiFi" 或 "厨房灯"。
+为了使 ToggleSwitch 易于理解，用一或两个词 (最好是名词) 标记它，以描述它控制的功能。例如，"WiFi" 或 "厨房灯"。
 
 ### 在 ToggleSwitch 和 CheckBox 之间选择
 
 对于某些操作，ToggleSwitch 或 CheckBox 可能都适用。为了决定哪个控件更好，请遵循以下提示：
 
-- 对于二元设置，当用户更改后立即生效时，使用切换开关。
+- 对于二元设置，当用户更改后立即生效时，使用 ToggleSwitch。
 
    ![](switch-vs-checkbox.png)
 
    在此示例中，使用 ToggleSwitch 可以清楚地看到厨房灯已设置为 "打开"。但对于 CheckBox，用户需要思考灯现在是否亮着，或者他们是否需要勾选框来打开灯。
 
-- 对于可选（"锦上添花"）项目，使用 CheckBox。
+- 对于可选 ("锦上添花") 项目，使用 CheckBox。
 
 - 当用户必须执行额外步骤才能使更改生效时，使用 CheckBox。例如，如果用户必须单击 "提交" 或 "下一步" 按钮来应用更改，请使用 CheckBox。
 

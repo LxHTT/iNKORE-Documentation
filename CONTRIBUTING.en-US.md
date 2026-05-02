@@ -121,7 +121,7 @@ For example, avoid writing like this:
 
 ```md
 2024.5.2 4:08 | 2nd May 2024 | 2024年5月2日下午4点8分
-我买了34个苹果（是红的）和1只鸡【不知道是公鸡 / 还是 / 母鸡】。
+我买了34个苹果 (是红的) 和1只鸡【不知道是公鸡 / 还是 / 母鸡】。
 ```
 
 Instead, write like this for better readability:

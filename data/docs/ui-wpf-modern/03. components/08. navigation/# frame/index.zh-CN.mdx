@@ -18,7 +18,7 @@ WPF 的 Frame 控件支持在内容之间进行导航。Frame 可以由 Window�
 
 以下示例展示如何创建一个简单的 Frame 控件，并在一组页面之间导航。
 
-首先，创建两个页面，分别命名为 `Page1.xaml` 和 `Page2.xaml`。新建一个名为 `Pages` 的文件夹，右键该文件夹并选择 **Add** → **New Item**。选择 **WPF / Page** 并命名为 `Page1.xaml`。重复同样步骤创建 `Page2.xaml`。
+首先，创建两个页面，分别命名为 `Page1.xaml` 和 `Page2.xaml`。新建一个名为 `Pages` 的文件夹，右键该文件夹并选择 **添加** → **新建项**。选择 **页 (WPF) ** 并命名为 `Page1.xaml`。重复同样步骤创建 `Page2.xaml`。
 
 ![Add a file to the project](add-a-fiile-to-project.png)
 
@@ -30,7 +30,7 @@ WPF 的 Frame 控件支持在内容之间进行导航。Frame 可以由 Window�
 xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
 ```
 
-将根类从 Page 改为 `ui:Page`。然后进入代码隐藏文件（例如 `Page1.xaml.cs`），把基类从 Page 改为 `iNKORE.UI.WPF.Modern.Controls.Page`。
+将根类从 Page 改为 `ui:Page`。然后进入代码隐藏文件 (例如 `Page1.xaml.cs`) ，把基类从 Page 改为 `iNKORE.UI.WPF.Modern.Controls.Page`。
 
 接着向页面中添加一些内容。例如，为每个页面添加一个 `TextBlock` 来显示页面名称。
 
@@ -181,7 +181,7 @@ private void Button_NavigateToPage1_Click(object sender, RoutedEventArgs e)
 }
 ```
 
-或者这样（更推荐）：
+或者这样 (更推荐) ：
 
 ```csharp
 Page1 Page_1 = new Page1();
@@ -242,7 +242,7 @@ public void NavigateTo(object content, object? extraData = null, NavigationTrans
 ```csharp
 private void Button_NavigateToPage1_Click(object sender, RoutedEventArgs e)
 {
-    // Don't use `Frame_Main.Navigate(Page_1) any more, it won't work.`
+    // 不要再使用 `Frame_Main.Navigate(Page_1)` 了，这不会生效。
 # highlight-next-line
     NavigateTo(Page_1);
 }
@@ -268,59 +268,59 @@ private void Button_NavigateToPage2_Click(object sender, RoutedEventArgs e)
 
 ```csharp
 /// <summary>
-/// Causes the Frame to load content represented by the specified Page.
+/// 使 Frame 加载由指定 Page 表示的内容。
 /// </summary>
-/// <param name="sourcePageType">The page to navigate to, specified as a type reference to its partial class type.</param>
-/// <returns>true if navigation is not canceled; otherwise, false.</returns>
+/// <param name="sourcePageType">要导航到的页面，以其部分类类型的类型引用指定。</param>
+/// <returns>如果导航未被取消，则为 true；否则为 false。</returns>
 public bool Navigate(Type sourcePageType);
 
 /// <summary>
-/// Causes the Frame to load content represented by the specified Page, also passing
-/// a parameter to be interpreted by the target of the navigation.
+/// 使 Frame 加载由指定 Page 表示的内容，并同时传递一个参数，
+/// 供导航目标解释。
 /// </summary>
-/// <param name="sourcePageType">The page to navigate to, specified as a type reference to its partial class type.</param>
-/// <param name="parameter">The navigation parameter to pass to the target page.</param>
-/// <returns>true if navigation is not canceled; otherwise, false.</returns>
+/// <param name="sourcePageType">要导航到的页面，以其部分类类型的类型引用指定。</param>
+/// <param name="parameter">传递给目标页面的导航参数。</param>
+/// <returns>如果导航未被取消，则为 true；否则为 false。</returns>
 public bool Navigate(Type sourcePageType, object parameter);
 
 /// <summary>
-/// Causes the Frame to load content represented by the specified Page -derived data
-/// type, also passing a parameter to be interpreted by the target of the navigation,
-/// and a value indicating the animated transition to use.
+/// 使 Frame 加载由指定 Page 派生数据类型表示的内容，
+/// 同时传递一个供导航目标解释的参数，
+/// 以及一个指示要使用的动画过渡效果的值。
 /// </summary>
-/// <param name="sourcePageType">The page to navigate to, specified as a type reference to its partial class type.</param>
-/// <param name="parameter">The navigation parameter to pass to the target page.</param>
-/// <param name="infoOverride">Info about the animated transition.</param>
-/// <returns>true if navigation is not canceled; otherwise, false.</returns>
+/// <param name="sourcePageType">要导航到的页面，以其部分类类型的类型引用指定。</param>
+/// <param name="parameter">传递给目标页面的导航参数。</param>
+/// <param name="infoOverride">有关动画过渡的信息。</param>
+/// <returns>如果导航未被取消，则为 true；否则为 false。</returns>
 public bool Navigate(Type sourcePageType, object parameter, NavigationTransitionInfo infoOverride);
 
 /// <summary>
-/// Navigates asynchronously to content that is contained by an object.
+/// 异步导航到由对象包含的内容。
 /// </summary>
-/// <param name="content">An System.Object that contains the content to navigate to.</param>
-/// <param name="infoOverride">Info about the animated transition.</param>
-/// <returns>true if navigation is not canceled; otherwise, false.</returns>
+/// <param name="content">包含要导航到的内容的 System.Object。</param>
+/// <param name="infoOverride">有关动画过渡的信息。</param>
+/// <returns>如果导航未被取消，则为 true；否则为 false。</returns>
 public bool Navigate(object content, NavigationTransitionInfo infoOverride);
 
 /// <summary>
-/// Navigates asynchronously to content that is contained by an object, and passes
-/// an object that contains data to be used for processing during navigation.
+/// 异步导航到由对象包含的内容，并传递一个对象，
+/// 其中包含用于导航过程中处理的数据。
 /// </summary>
-/// <param name="content">An System.Object that contains the content to navigate to.</param>
-/// <param name="extraData">A System.Object that contains data to be used for processing during navigation.</param>
-/// <param name="infoOverride">Info about the animated transition.</param>
-/// <returns>true if navigation is not canceled; otherwise, false.</returns>
+/// <param name="content">包含要导航到的内容的 System.Object。</param>
+/// <param name="extraData">包含用于导航过程中处理的数据的 System.Object。</param>
+/// <param name="infoOverride">有关动画过渡的信息。</param>
+/// <returns>如果导航未被取消，则为 true；否则为 false。</returns>
 public bool Navigate(object content, object extraData, NavigationTransitionInfo infoOverride);
 
 /// <summary>
-/// Navigates asynchronously to source content located at a uniform resource identifier
-/// (URI), and passes an object that contains data to be used for processing during
-/// navigation, and a value indicating the animated transition to use.
+/// 异步导航到位于统一资源标识符
+/// (URI) 的源内容，并传递一个包含用于导航过程中处理的数据的对象，
+/// 以及一个指示要使用的动画过渡效果的值。
 /// </summary>
-/// <param name="source">A System.Uri object initialized with the URI for the desired content.</param>
-/// <param name="extraData">A System.Object that contains data to be used for processing during navigation.</param>
-/// <param name="infoOverride">Info about the animated transition.</param>
-/// <returns>true if navigation is not canceled; otherwise, false.</returns>
+/// <param name="source">使用所需内容的 URI 初始化的 System.Uri 对象。</param>
+/// <param name="extraData">包含用于导航过程中处理的数据的 System.Object。</param>
+/// <param name="infoOverride">有关动画过渡的信息。</param>
+/// <returns>如果导航未被取消，则为 true；否则为 false。</returns>
 public bool Navigate(Uri source, object extraData, NavigationTransitionInfo infoOverride);
 ```
 
@@ -328,28 +328,28 @@ public bool Navigate(Uri source, object extraData, NavigationTransitionInfo info
 
 ### GoBack
 
-GoBack() 方法用于导航到返回历史中的最近一项（前提是 Frame 管理自己的导航历史）。
+GoBack() 方法用于导航到返回历史中的最近一项 (前提是 Frame 管理自己的导航历史) 。
 
 ```csharp
 /// <summary>
-/// Navigates to the most recent item in back navigation history, if a Frame manages
-/// its own navigation history, and specifies the animated transition to use.
+/// 如果 Frame 管理自己的导航历史，则导航到返回导航历史中的最近一项，
+/// 并指定要使用的动画过渡效果。
 /// </summary>
-/// <param name="transitionInfoOverride">Info about the animated transition to use.</param>
+/// <param name="transitionInfoOverride">要使用的动画过渡信息。</param>
 public void GoBack(NavigationTransitionInfo transitionInfoOverride);
 ```
 
 您可以在有或没有过渡信息的情况下调用 **GoBack**，例如：
 
 ```csharp
-// Without transitionInfoOverride, default transition will be used.
+// 不传入 transitionInfoOverride 时，将使用默认过渡效果。
 Frame_Main.GoBack();
 ```
 
 或者：
 
 ```csharp
-// With transitionInfoOverride, specified transition will be used.
+// 传入 transitionInfoOverride 时，将使用指定的过渡效果。
 Frame_Main.GoBack(new DrillInNavigationTransitionInfo());
 ```
 
@@ -361,7 +361,7 @@ Frame_Main.GoBack(new DrillInNavigationTransitionInfo());
 
 #### Entrance
 
-Page refresh 是进入内容时“向上滑动 + 淡入”的组合动画。当用户回到导航栈顶部时（例如在标签页或左侧导航项之间切换），适合使用该动画。
+页面刷新是进入内容时“向上滑动 + 淡入”的组合动画。当用户回到导航顶部时 (例如在标签页或左侧导航项之间切换) ，适合使用该动画。
 
 期望带给用户的感受是：重新开始。
 
@@ -370,19 +370,19 @@ Page refresh 是进入内容时“向上滑动 + 淡入”的组合动画。当�
 该动画由 EntranceNavigationTransitionInfo 类表示。
 
 ```csharp
-// Explicitly play the page refresh animation
+// 显式播放页面刷新动画
 myFrame.Navigate(Page_2, null, new EntranceNavigationTransitionInfo());
 ```
 
 :::note
 
-Frame 会自动使用 NavigationThemeTransition 为两个页面间的导航添加动画。默认动画为 page refresh。
+Frame 会自动使用 NavigationThemeTransition 为两个页面间的导航添加动画。默认动画为 Page refresh。
 
 :::
 
 #### Drill
 
-当用户在应用中进入更深层级（例如选择项目后查看更详细信息）时，使用 drill 动画。
+当用户在应用中进入更深层级 (例如选择项目后查看更详细信息) 时，使用 Drill 动画。
 
 期望带给用户的感受是：正在深入应用。
 
@@ -391,24 +391,24 @@ Frame 会自动使用 NavigationThemeTransition 为两个页面间的导航添�
 该动画由 DrillInNavigationTransitionInfo 类表示。
 
 ```csharp
-// Play the drill in animation
+// 播放 Drill-in 动画
 myFrame.Navigate(Page_2, null, new DrillInNavigationTransitionInfo());
 ```
 
 #### Slide
 
-使用 slide 过渡可表达同级页面彼此相邻。NavigationView 控件在顶部导航时会自动使用这种动画；如果您在构建自己的水平导航体验，也可以用 SlideNavigationTransitionInfo 来实现横向滑动。
+使用 Slide 过渡可表达同级页面彼此相邻。NavigationView 控件在顶部导航时会自动使用这种动画；如果您在构建自己的水平导航体验，也可以用 SlideNavigationTransitionInfo 来实现横向滑动。
 
 期望带给用户的感受是：正在相邻页面之间切换。
 
 ```csharp
-// Navigate to the right, ie. from LeftPage to RightPage
+// 向右导航，即从 LeftPage 到 RightPage
 myFrame.Navigate(RightPage, null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
 
-// Navigate to the left, ie. from RightPage to LeftPage
+// 向左导航，即从 RightPage 到 LeftPage
 myFrame.Navigate(LeftPage, null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
 
-// Navigate to the bottom, ie. from TopPage to BottomPage
+// 向下导航，即从 TopPage 到 BottomPage
 myFrame.Navigate(BottomPage, null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromBottom });
 ```
 
@@ -417,7 +417,7 @@ myFrame.Navigate(BottomPage, null, new SlideNavigationTransitionInfo() { Effect 
 如果希望导航过程中不播放任何动画，可使用 SuppressNavigationTransitionInfo 来替代其他 NavigationTransitionInfo 子类型。
 
 ```csharp
-// Suppress the default animation
+// 禁用默认动画
 myFrame.Navigate(Page2, null, new SuppressNavigationTransitionInfo());
 ```
 
@@ -427,9 +427,9 @@ myFrame.Navigate(Page2, null, new SuppressNavigationTransitionInfo());
 
 ### 相关文章
 
-- [Components / NavigationView](./navigation-view)
+- [组件 / NavigationView](./navigation-view)
 
-- [Components / TabControl](./tab-control)
+- [组件 / TabControl](./tab-control)
 
 ### Microsoft Learn
 

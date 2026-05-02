@@ -4,7 +4,7 @@ description: "用户可以选中或清除的控件。"
 
 # CheckBox
 
-您可以在应用程序的用户界面 (UI) 中使用 CheckBox 来表示用户可以选中或清除的选项。您可以使用单个复选框，也可以将两个或多个复选框分组使用。
+您可以在应用程序的用户界面 (UI) 中使用 CheckBox 来表示用户可以选中或清除的选项。您可以使用单个 CheckBox，也可以将两个或多个 CheckBox 分组使用。
 
 - **类**: [System.Windows.Controls](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls)[.CheckBox](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.checkbox)
 
@@ -64,33 +64,33 @@ Indeterminate:
 
 ## 备注
 
-CheckBox 控件继承自 [ToggleButton](%BASE_NAME%/components/basic-input/toggle-button)，并且可以具有三种状态：已选中（selected）、未选中（cleared）和不确定。
+CheckBox 控件继承自 [ToggleButton](%BASE_NAME%/components/basic-input/toggle-button)，并且可以具有三种状态：已选中 (selected) 、未选中 (cleared) 和不确定。
 
-CheckBox 是一个 ContentControl，这意味着它可以包含任意类型的单个对象（例如字符串、图像或面板）。有关详细信息，请参阅 [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) 类。
+CheckBox 是一个 ContentControl，这意味着它可以包含任意类型的单个对象 (例如字符串、图像或面板) 。有关详细信息，请参阅 [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) 类。
 
 ### 这是正确的控件吗？
 
-对于二元的“是/否”选择，请使用单个复选框，例如“记住我？”登录场景或服务条款同意场景。
+对于二元的“是/否”选择，请使用单个 CheckBox，例如“记住我？”登录场景或服务条款同意场景。
 
-![用于单个选择的复选框](single-check-box.png)
+![用于单个选择的CheckBox](single-check-box.png)
 
-对于二元选择，复选框与 [ToggleSwitch](%BASE_NAME%/components/basic-input/toggle-switch) 的主要区别在于，复选框用于状态，切换开关用于操作。您可以延迟提交复选框交互（例如作为表单提交的一部分），而切换开关交互应立即提交。另外，只有复选框支持多选。
+对于二元选择，CheckBox 与 [ToggleSwitch](%BASE_NAME%/components/basic-input/toggle-switch) 的主要区别在于，CheckBox 用于状态，ToggleSwitch 用于操作。您可以延迟提交 CheckBox 交互 (例如作为表单提交的一部分) ，而 ToggleSwitch 交互应立即提交。另外，只有 CheckBox 支持多选。
 
-对于用户从一组非互斥选项中选择一个或多个项目的多选场景，请使用**多个复选框**。
+对于用户从一组非互斥选项中选择一个或多个项目的多选场景，请使用**多个 CheckBox**。
 
-当用户可以选择任意组合的选项时，请创建一组复选框。
+当用户可以选择任意组合的选项时，请创建一组 CheckBox。
 
-![使用复选框选择多个选项](multiple-options.png)
+![使用 CheckBox 选择多个选项](multiple-options.png)
 
-当选项可以分组时，您可以使用不确定状态的复选框来表示整个组。当用户选择了组中的部分子项但不是全部子项时，请使用复选框的不确定状态。
+当选项可以分组时，您可以使用 Indeterminate 状态的 CheckBox 来表示整个组。当用户选择了组中的部分子项但不是全部子项时，请使用 CheckBox 的Indeterminate 状态。
 
-![用于显示混合选择的复选框](tree-check-boxes.png)
+![用于显示混合选择的 CheckBox](tree-check-boxes.png)
 
-复选框和单选按钮都允许用户从一组选项中进行选择。复选框允许用户选择多个选项的组合；而单选按钮允许用户在互斥选项中做出单一选择。当有多个选项但只能选择其中一个时，请改用 [RadioButton](%BASE_NAME%/components/basic-input/radio-button)。
+CheckBox 和 RadioButton 都允许用户从一组选项中进行选择。CheckBox 允许用户选择多个选项的组合；而 RadioButton 允许用户在互斥选项中做出单一选择。当有多个选项但只能选择其中一个时，请改用 [RadioButton](%BASE_NAME%/components/basic-input/radio-button)。
 
 :::tip
 
-如果列表中有多个选项，您可以使用复选框而不是开/关切换开关来节省空间。如果只有一个选项，请避免使用复选框，而应使用开/关切换开关。
+如果列表中有多个选项，您可以使用 CheckBox 而不是开/关 ToggleSwitch 来节省空间。如果只有一个选项，请避免使用 CheckBox，而应使用开/关 ToggleSwitch。
 
 :::
 
@@ -102,7 +102,7 @@ CheckBox 控件有一个内置样式：
 
 ### 紧凑尺寸
 
-如果您在紧凑布局中使用 CheckBox，可能会发现即使复选框没有内容，它也会占用一定空间。这是因为默认样式中设置了 **MinWidth** 属性。
+如果您在紧凑布局中使用 CheckBox，可能会发现即使 CheckBox 没有内容，它也会占用一定空间。这是因为默认样式中设置了 **MinWidth** 属性。
 
 ![](still-taking-space.png)
 

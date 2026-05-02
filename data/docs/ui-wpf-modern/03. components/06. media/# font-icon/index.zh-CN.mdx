@@ -62,13 +62,13 @@ FontIcon 是一个用于显示指定字体中图标字形的控件。它是 Imag
 
 ![Different sizes of Fluent System Icons](different-sizes-of-fluent-system.png)
 
-对于带有指定尺寸的图标集（例如 Fluent System Icons），您还需要在组件中通过 **FontSize** 属性指定匹配尺寸。
+对于带有指定尺寸的图标集 (例如 Fluent System Icons) ，您还需要在组件中通过 **FontSize** 属性指定匹配尺寸。
 
 :::info
 
-**FontSize** 属性的默认值是 `16`。如果图标集本身就是为 16px 设计（例如 Segoe Fluent Icons），通常不需要额外指定 **FontSize**。
+**FontSize** 属性的默认值是 `16`。如果图标集本身就是为 16px 设计 (例如 Segoe Fluent Icons) ，通常不需要额外指定 **FontSize**。
 
-某些图标集会打包多个尺寸的图标（例如 Fluent System Icons），这时正确设置 FontSize 非常重要。
+某些图标集会打包多个尺寸的图标 (例如 Fluent System Icons) ，这时正确设置 FontSize 非常重要。
 
 如果元素的 FontSize 与图标设计尺寸不匹配，像素级对齐效果可能会丢失，图标看起来也可能不自然。
 
@@ -94,13 +94,13 @@ FontIcon 是一个用于显示指定字体中图标字形的控件。它是 Imag
 
 我们强烈不建议这样做，因为这会提高代码耦合度和复杂度，后期维护成本也更高。
 
-建议优先使用现成的、符合 Fluent Design 的图标库（见上文），或将您自己的图标库封装为 FontIconData（[教程在此](COMING_SOON)）。不要把 Glyph 属性作为常规方案。
+建议优先使用现成的、符合 Fluent Design 的图标库 (见上文) ，或将您自己的图标库封装为 FontIconData ([教程在此](COMING_SOON)) 。不要把 Glyph 属性作为常规方案。
 
 :::
 
 ### 分层与镜像
 
-某些图标（例如 Segoe Fluent Icons）具有相同固定宽度、统一高度和一致的左侧起点，因此可以通过将字形直接叠加来实现分层和着色效果。下例展示了在零宽红色爱心上绘制黑色轮廓。
+某些图标 (例如 Segoe Fluent Icons) 具有相同固定宽度、统一高度和一致的左侧起点，因此可以通过将字形直接叠加来实现分层和着色效果。下例展示了在零宽红色爱心上绘制黑色轮廓。
 
 ```xml
 <Grid>
@@ -146,7 +146,7 @@ FontIcon 是一个用于显示指定字体中图标字形的控件。它是 Imag
 
 如果您使用上文提到的 Microsoft 预置图标集，请注意图标可用性。
 
-- 对于 **Segoe Fluent Icons**，FontIcon 会使用系统中的字体。换言之，它们通常仅能在 Windows 11 或更高版本中正确渲染。在 Windows 10 上会回退到 **Segoe MDL Assets 2**（旧设计），在 Windows 7 上则不会渲染这些图标。另外，某些图标在 Segoe MDL Assets 2 中可能缺失，只有用户机器安装了 Segoe Fluent Icons 字体后才可用。
+- 对于 **Segoe Fluent Icons**，FontIcon 会使用系统中的字体。换言之，它们通常仅能在 Windows 11 或更高版本中正确渲染。在 Windows 10 上会回退到 **Segoe MDL Assets 2** (旧设计) ，在 Windows 7 上则不会渲染这些图标。另外，某些图标在 Segoe MDL Assets 2 中可能缺失，只有用户机器安装了 Segoe Fluent Icons 字体后才可用。
 
     :::info 为什么不内置 Segoe Icons？
 
@@ -154,7 +154,7 @@ FontIcon 是一个用于显示指定字体中图标字形的控件。它是 Imag
 
     强烈建议使用开放且免费的 **Fluent System Icons**。它不仅支持多尺寸，还同时提供 regular 与 filled 两种变体。
 
-    如果您确实要使用 Segoe Fluent Icons 并希望应用兼容 Windows 7，最佳做法是先检测用户设备是否安装了 Segoe Fluent Icons。若未安装，可引导用户从 Microsoft 下载字体（https://aka.ms/SegoeFluentIcons）并安装。
+    如果您确实要使用 Segoe Fluent Icons 并希望应用兼容 Windows 7，最佳做法是先检测用户设备是否安装了 Segoe Fluent Icons。若未安装，可引导用户从 Microsoft 下载字体 (https://aka.ms/SegoeFluentIcons) 并安装。
     安装后需要重启应用，WPF 才能正确加载新字体。
 
     :::
@@ -171,17 +171,17 @@ FontIcon 是一个用于显示指定字体中图标字形的控件。它是 Imag
 
 ### 相关文章
 
-- [Components / ImageIcon](./image-icon)
+- [组件 / ImageIcon](./image-icon)
 
-- [Components / SymbolIcon](./symbol-icon)
+- [组件 / SymbolIcon](./symbol-icon)
 
-- [Components / PathIcon](./path-icon)
+- [组件 / PathIcon](./path-icon)
 
-- [Components / IconAndText](./icon-and-text)
+- [组件 / IconAndText](./icon-and-text)
 
-- [Components / Button](../basic-input/button)
+- [组件 / Button](../basic-input/button)
 
-- [Components / AppBarButton](../menu-and-toolbars/appbar-button)
+- [组件 / AppBarButton](../menu-and-toolbars/appbar-button)
 
 ### Microsoft Learn
 

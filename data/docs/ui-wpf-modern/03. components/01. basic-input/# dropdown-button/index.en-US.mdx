@@ -8,7 +8,7 @@ A DropDownButton is a button that shows a chevron as a visual indicator that it 
 
 - **Class**: [iNKORE.UI.WPF.Modern.Controls.DropDownButton](%BASE_NAME%/definitions/controls/dropdown-button)
 
-The drop down button inherits the Click event, but you typically don't use it. Instead, you use the Flyout property to attach a flyout and invoke actions by using menu options in the flyout. The flyout opens automatically when the button is clicked. Be sure to specify the Placement property of your flyout to ensure the desired placement in relation to the button. The default placement algorithm might not produce the intended placement in all situations. For more info about flyouts, see **Flyout** and **MenuFlyout**.
+The DropDownButton inherits the Click event, but you typically don't use it. Instead, you use the Flyout property to attach a flyout and invoke actions by using menu options in the flyout. The flyout opens automatically when the button is clicked. Be sure to specify the Placement property of your flyout to ensure the desired placement in relation to the button. The default placement algorithm might not produce the intended placement in all situations. For more info about flyouts, see **Flyout** and **MenuFlyout**.
 
 ## Examples
 
@@ -30,7 +30,7 @@ This code makes a DropDownButton that has a flyout which opens when the button i
 
 ### With MenuFlyout
 
-This example shows how to create a drop down button with a MenuFlyout that contains commands for paragraph alignment in a TextBox.
+This example shows how to create a DropDownButton with a MenuFlyout that contains commands for paragraph alignment in a TextBox.
 
 ```xml
 <ui:DropDownButton x:Name="DropDownButton_Align">

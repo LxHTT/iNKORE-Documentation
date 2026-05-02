@@ -1,20 +1,21 @@
 ---
-description: "A control that display content on discrete pages accessed by selecting the appropriate tab."
+description: "一个通过选择相应选项卡来访问离散页面并显示内容的控件。"
 ---
 
 # TabControl
 
-Tabs organize and allow navigation between groups of content that are related and at the same level of hierarchy.
+选项卡 (Tabs) 用于组织相关内容组，并允许在同一层级的内容页面之间进行导航。
 
 - **Class**: [System.Windows.Controls](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls)[.TabControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.tabcontrol)
 
 - **Inheritance**: [Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) → (...) → [Control](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control) → [ItemsControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.itemscontrol) → [Selector](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.primitives.selector) → [TabControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.tabcontrol)
 
-## Examples
 
-### Basic TabControl
+## 示例
 
-The following example creates a simple TabControl that has 3 tabs.
+### 基本的 TabControl
+
+下面的示例创建了一个包含 3 个选项卡的简单 TabControl。
 
 ```xml
 <TabControl>
@@ -34,11 +35,12 @@ The following example creates a simple TabControl that has 3 tabs.
 </TabControl>
 ```
 
-![A basic TabControl](basic-tab-control.png)
+![一个基本的 TabControl](basic-tab-control.png)
 
-### TabItem with icon
 
-You can add icons to every TabItem using the **ui:TabItemHelper.Icon** property.
+### 带图标的 TabItem
+
+你可以使用 **ui:TabItemHelper.Icon** 属性为每个 `TabItem` 添加图标。
 
 ```xml
 <TabControl>
@@ -72,13 +74,14 @@ You can add icons to every TabItem using the **ui:TabItemHelper.Icon** property.
 
 ![TabItem with icons](tab-item-with-icon.png)
 
-### Handling command buttons
 
-The default style of TabControl comes with a close button that you can use for removing or closing the tab. You can use **ui:TabItemHelper.CloseTabButtonCommand** to handle the click of the close button.
+### 处理命令按钮
 
-There's also a add tab button that you can use for creating new tabs. You can use **ui:TabControlHelper.AddTabButtonCommand** to handle the click of the add button.
+TabControl 的默认样式带有关闭按钮，可用于移除或关闭选项卡。你可以使用 **ui:TabItemHelper.CloseTabButtonCommand** 来处理关闭按钮的点击事件。
 
-If you want to remove the close button for the whole TabControl, you can apply **ui:TabControlHelper.IsAddTabButtonVisible** on your TabControl. This will remove both the close buttons and add tab button.
+此外还有一个“添加选项卡”按钮，可用于创建新选项卡。你可以使用 **ui:TabControlHelper.AddTabButtonCommand** 来处理添加按钮的点击事件。
+
+如果你想为整个 TabControl 删除这些按钮，可以在 TabControl 上设置 **ui:TabControlHelper.IsAddTabButtonVisible** 为 `False`，这会同时移除关闭按钮和添加选项卡按钮。
 
 ```xml
 <TabControl ui:TabControlHelper.IsAddTabButtonVisible="False">
@@ -100,11 +103,12 @@ If you want to remove the close button for the whole TabControl, you can apply *
 
 ![All close buttons are removed](remove-all-close-buttons.png)
 
-### Add header and footer
 
-You can also use the **ui:TabControlHelper.TabStripHeader** and **ui:TabControlHelper.TabStripFooter** property to add the strip header and footer.
+### 添加页眉和页脚
 
-Since this two properties accept `object` values, you can add literally anything to the header and footer, like text, controls, icons and more.
+你也可以使用 **ui:TabControlHelper.TabStripHeader** 和 **ui:TabControlHelper.TabStripFooter** 属性来为选项卡条添加页眉和页脚。
+
+由于这两个属性接受 `object` 值，你可以在页眉和页脚中放置任意内容，例如文本、控件、图标等。
 
 ```xml
 <TabControl>
@@ -135,11 +139,12 @@ Since this two properties accept `object` values, you can add literally anything
 </TabControl>
 ```
 
-![TabControl with customizable header and footer](with-header-and-footer.png)
+![带有自定义页眉和页脚的 TabControl](with-header-and-footer.png)
 
-### Pivot style
 
-The Pivot enables touch-swiping between a small set of content sections. To create a Pivot control, simply apply the pivot style to a TabControl.
+### Pivot 样式
+
+Pivot 样式支持在一组内容节之间通过触控滑动进行切换。要创建 Pivot 控件，只需将 Pivot 样式应用到 `TabControl` 即可。
 
 ```xml
 <TabControl Style="{StaticResource {x:Static ui:ThemeKeys.TabControlPivotStyleKey}}">
@@ -159,15 +164,16 @@ The Pivot enables touch-swiping between a small set of content sections. To crea
 </TabControl>
 ```
 
-![A basic pivot style](basic-pivot-style.png)
+![一个基本的 Pivot 样式](basic-pivot-style.png)
+
 
 :::warning
 
-Once a TabControl is applied Pivot style, the **TabStripPlacement** property will be unusable. A Pivot can only have its Tabs on the top.
+一旦将 TabControl 应用为 Pivot 样式，`TabStripPlacement` 属性将不可用。Pivot 只能在顶部显示选项卡。
 
-Actually this is because we didn't work out the code other placement scenarios, If you are interested, feel free to add this feature in [Pivot.xaml](https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/source/iNKORE.UI.WPF.Modern/Themes/Styles/Pivot.xaml), and PRs are welcomed!
+这主要是因为我们尚未为其他放置场景完善代码；如果你有兴趣，可以在 [Pivot.xaml](https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/source/iNKORE.UI.WPF.Modern/Themes/Styles/Pivot.xaml) 中添加该功能，欢迎提交 PR！
 
-Also, if you want to add headers to Pivot styled TabControl, please don't use `ui:TabControlHelper`, instead use `ui:PivotHelper` like this:
+另外，如果你想为 Pivot 样式的 TabControl 添加页眉，请不要使用 `ui:TabControlHelper`，而应使用 `ui:PivotHelper`，例如：
 
 - `ui:TabControlHelper.TabStripHeader` → `ui:PivotHelper.LeftHeader`
 
@@ -175,9 +181,10 @@ Also, if you want to add headers to Pivot styled TabControl, please don't use `u
 
 :::
 
-### Pivot with icons
 
-You can add icons for a Pivot tab item using **ui:TabItemHelper.Icon** as well. However, we recommend you adjust the icon's size since the Pivot header is larger, the recommended value is `20` or `24`.
+### 带图标的 Pivot
+
+你也可以使用 **ui:TabItemHelper.Icon** 为 Pivot 的选项卡添加图标。但建议调整图标大小，因为 Pivot 的头部更大，推荐使用 `20` 或 `24` 的字体大小。
 
 ```xml
 <TabControl Style="{StaticResource {x:Static ui:ThemeKeys.TabControlPivotStyleKey}}" >
@@ -203,48 +210,51 @@ You can add icons for a Pivot tab item using **ui:TabItemHelper.Icon** as well. 
 </TabControl>
 ```
 
-![A pivot with icons](pivot-with-icon.png)
+![一个带图标的 Pivot](pivot-with-icon.png)
+
 
 :::warning
 
-This feature is only available for version **0.9.28** or higher. If you have set the **ui:TabItemHelper.Icon** property and find out the icon not appearing, please consider upgrading the library version.
+此功能仅在 **0.9.28** 或更高版本可用。如果你已设置 **ui:TabItemHelper.Icon** 却未看到图标，请考虑升级库版本。
 
 :::
 
-## Remarks
 
-### Is this the right control?
+## 备注
 
-To create a control that displays a collection of tabs that can be used to display several documents, which can be added, closed or moved, use a TabControl with the default style.
+### 这是合适的控件吗？
 
-To achieve common top navigation patterns, we recommend using NavigationView or a TabControl with Pivot style.
+如果要创建一个显示选项卡集合的控件 (用于展示多个文档，并支持添加、关闭或移动) ，请使用带有默认样式的 `TabControl`。
 
-Some key differences between the NavigationView and Pivot are listed here:
+若要实现常见的顶部导航模式，我们建议使用 `NavigationView` 或带有 Pivot 样式的 `TabControl`。
 
-- Pivot supports touch-swiping to switch between items.
-- Overflow items in a Pivot carousel, while NavigationView uses a menu dropdown overflow so that users can see all items.
-- Pivot handles navigation between content sections, while NavigationView allows for more control over navigation behavior.
+下面列出 `NavigationView` 与 `Pivot` 的一些关键差异：
 
-### Styles
-
-There are two built-in styles for TabControl control:
-
-- DefaultTabControlStyle: The default style for TabControl, you can access it with `ui:ThemeKeys.DefaultTabControlStyleKey`.
-
-- TabControlPivotStyle: The Pivot style for TabControl, you can access it with `ui:ThemeKeys.TabControlPivotStyleKey`.
-
-There are two built-in styles for TabItem control:
-
-- DefaultTabItemStyle: The default style for TabItem, you can access it with `ui:ThemeKeys.DefaultTabItemStyleKey`.
-
-- TabItemPivotStyle: The Pivot style for TabControl, you can access it with `ui:ThemeKeys.TabItemPivotStyleKey`.
+- Pivot 支持通过触控滑动在项之间切换。
+- Pivot 使用轮播 (Carousel) 处理溢出项，而 NavigationView 使用菜单下拉的方式展示溢出项，便于用户查看所有项。
+- Pivot 适合处理内容节之间的切换，而 NavigationView 在导航行为上提供更多控制能力。
 
 
-## See also
+### 样式
 
-### Related articles
+`TabControl` 内置了两种样式：
 
-- [Components / NavigationView](./navigation-view)
+- `DefaultTabControlStyle`：`TabControl` 的默认样式，可通过 `ui:ThemeKeys.DefaultTabControlStyleKey` 访问。
+
+- `TabControlPivotStyle`：`TabControl` 的 Pivot 样式，可通过 `ui:ThemeKeys.TabControlPivotStyleKey` 访问。
+
+`TabItem` 也内置了两种样式：
+
+- `DefaultTabItemStyle`：`TabItem` 的默认样式，可通过 `ui:ThemeKeys.DefaultTabItemStyleKey` 访问。
+
+- `TabItemPivotStyle`：`TabItem` 的 Pivot 样式，可通过 `ui:ThemeKeys.TabItemPivotStyleKey` 访问。
+
+
+## 另请参阅
+
+### 相关文章
+
+- [组件 / NavigationView](./navigation-view)
 
 ### Microsoft Learn
 
